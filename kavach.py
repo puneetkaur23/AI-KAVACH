@@ -115,8 +115,9 @@ Examples:
 class KavachRunner:
     """Orchestrates the full AI Kavach pipeline for one or more targets."""
 
-    def __init__(self, args: argparse.Namespace):
+    def __init__(self, args: argparse.Namespace, progress_callback=None):
         self.args = args
+        self.progress_callback = progress_callback
         self.log = logging.getLogger("kavach.runner")
 
         # Initialize components
@@ -130,11 +131,20 @@ class KavachRunner:
         os.makedirs("output", exist_ok=True)
         os.makedirs(args.output, exist_ok=True)
 
+    def _notify(self, stage: str, message: str) -> None:
+        """Report progress stage and log message if callback registered."""
+        if self.progress_callback:
+            try:
+                self.progress_callback(stage, message)
+            except Exception:
+                pass
+
     def run_target(self, target_path: str) -> list[FindingReport]:
         """Run the full pipeline on a single target directory."""
         target_path = os.path.abspath(target_path)
         target_name = os.path.basename(target_path)
 
+        self._notify("INITIALIZING", f"Target acquisition: {target_name}")
         self.log.info("")
         self.log.info("━" * 70)
         self.log.info("  AI KAVACH — Processing target: %s", target_name)
@@ -144,20 +154,24 @@ class KavachRunner:
         reports: list[FindingReport] = []
 
         # ── Phase 1: Static Analysis (prioritization) ─────────────────
+        self._notify("STATIC_ANALYSIS", f"Running Semgrep AST rules on {target_name}...")
         self.log.info("[kavach] Phase 1/4: Static Analysis")
         semgrep = SemgrepAnalyzer(target_path)
         static_findings = semgrep.run()
         risky_funcs = [f.function_name for f in static_findings if f.function_name]
         self.log.info("[kavach] Static analysis: %d findings, risky functions: %s",
                       len(static_findings), risky_funcs[:5])
+        self._notify("STATIC_ANALYSIS", f"Static analysis complete: {len(static_findings)} rule matches found")
 
         # ── Phase 2: Fuzzing ──────────────────────────────────────────
         crashes: list[CrashRecord] = []
 
         if self.args.skip_fuzzing or self.args.no_docker:
+            self._notify("FUZZING", "Fuzzing skipped — loading existing crash artifacts")
             self.log.info("[kavach] Phase 2/4: Fuzzing (SKIPPED — using existing crashes)")
             crashes = self._load_existing_crashes(target_path, target_name)
         else:
+            self._notify("FUZZING", f"Starting AFL++ fuzzer (timeout={self.args.timeout}s)...")
             self.log.info("[kavach] Phase 2/4: Fuzzing (timeout=%ds)", self.args.timeout)
             try:
                 crashes = self._run_fuzzing(target_path, target_name)
@@ -167,9 +181,11 @@ class KavachRunner:
                 raise  # Let caller handle or propagate
 
         if not crashes:
+            self._notify("COMPLETED", f"No crashes discovered for {target_name} — clean target")
             self.log.info("[kavach] No crashes found for %s — target appears clean.", target_name)
             return []
 
+        self._notify("TRIAGE", f"Fuzzing complete: {len(crashes)} crash(es) captured, starting triage")
         self.log.info("[kavach] %d unique crash(es) found after dedup", len(crashes))
 
         # ── Phase 3: Triage ───────────────────────────────────────────
@@ -182,17 +198,20 @@ class KavachRunner:
             crash.risky_functions = risky_funcs
 
         # ── Phase 4: LLM Reasoning + Patch + Validate ─────────────────
+        self._notify("LLM_REASONING", f"Classified {len(triaged)} finding(s). Commencing AI root cause analysis...")
         self.log.info("[kavach] Phase 4/4: LLM Reasoning + Patch + Validation")
 
         for i, crash in enumerate(triaged):
             self.log.info("[kavach] Finding %d/%d: %s | %s | %s",
                           i + 1, len(triaged),
                           crash.target_name, crash.cwe, crash.severity.value)
+            self._notify("LLM_REASONING", f"Reasoning finding #{i+1}: {crash.cwe} ({crash.cwe_name})")
 
             if self.args.dry_run:
                 self.log.info("[kavach] DRY RUN — skipping LLM calls")
                 continue
 
+            self._notify("PATCH_GEN", f"Synthesizing unified diff patch with LLM ({self.args.llm})...")
             orchestrator = PipelineOrchestrator(
                 llm_client=self.llm_client,
                 validator=self.validator,
@@ -200,12 +219,15 @@ class KavachRunner:
                 max_retries=self.args.max_retries,
             )
 
+            self._notify("SANDBOX_VALIDATION", "Validating patch in sandboxed Docker container...")
             report = orchestrator.run(crash)
             reports.append(report)
 
             # Generate report files
+            self._notify("REPORTING", "Compiling Proof-of-Fix report...")
             paths = self.reporter.generate(report)
             self.log.info("[kavach] Report: %s", paths["html_path"])
+            self._notify("REPORTING", f"Report generated: {os.path.basename(paths['html_path'])}")
 
             # Print summary
             self._print_finding_summary(report)

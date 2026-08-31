@@ -263,6 +263,8 @@ class ScanResult:
     crashes_found: int = 0
     error_message: str = ""
     error_code: str = ""
+    current_stage: str = ""
+    recent_logs: list[str] = field(default_factory=list)
 
     @property
     def findings_count(self) -> int:

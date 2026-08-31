@@ -70,13 +70,19 @@ def run_api_tests():
 
     # ── Root ───────────────────────────────────────────────────
     def test_root(c):
-        r = c.get("/")
-        assert r.status_code == 200
-        data = r.json()
+        # Explicit JSON client
+        r_json = c.get("/", headers={"Accept": "application/json"})
+        assert r_json.status_code == 200
+        data = r_json.json()
         assert data["name"] == "AI Kavach CRS API"
         assert "endpoints" in data
 
-    test("A2: Root endpoint returns API info", test_root)
+        # Web browser client
+        r_html = c.get("/", headers={"Accept": "text/html,application/xhtml+xml"})
+        assert r_html.status_code == 200
+        assert "AI KAVACH" in r_html.text
+
+    test("A2: Root endpoint returns API info for JSON clients and HTML for browsers", test_root)
 
     # ── Targets ────────────────────────────────────────────────
     def test_targets_list(c):
@@ -178,8 +184,43 @@ def run_api_tests():
         assert "/api/v1/targets" in paths
         assert "/api/v1/scans" in paths
         assert "/api/v1/scans/{scan_id}" in paths
+        assert "/api/v1/scans/{scan_id}/report/html" in paths
 
     test("A13: OpenAPI spec contains all endpoints", test_openapi)
+
+    # ── Target Upload ──────────────────────────────────────────
+    def test_target_upload(c):
+        dummy_c_code = b"""#include <stdio.h>\nint main() { printf("test"); return 0; }\n"""
+        r = c.post(
+            "/api/v1/targets/upload",
+            files={"file": ("test_prog.c", dummy_c_code, "text/x-c")},
+            data={"target_name": "api_test_upload"}
+        )
+        assert r.status_code == 201, f"Expected 201, got {r.status_code}: {r.text}"
+        data = r.json()
+        assert "name" in data
+        assert "has_makefile" in data
+        assert data["has_makefile"] is True
+
+    test("A14: Upload custom target creates target directory", test_target_upload)
+
+    # ── Report Downloads ───────────────────────────────────────
+    def test_report_downloads_not_found(c):
+        r1 = c.get("/api/v1/scans/00000000-0000-0000-0000-000000000000/report/html")
+        assert r1.status_code == 404
+        r2 = c.get("/api/v1/scans/00000000-0000-0000-0000-000000000000/report/markdown")
+        assert r2.status_code == 404
+        r3 = c.get("/api/v1/scans/00000000-0000-0000-0000-000000000000/report/json")
+        assert r3.status_code == 404
+
+    test("A15: Report download endpoints handle nonexistent scan", test_report_downloads_not_found)
+
+    # ── Static UI Mounting ─────────────────────────────────────
+    def test_ui_served(c):
+        r = c.get("/ui")
+        assert r.status_code in (200, 307), f"Expected 200/307, got {r.status_code}"
+
+    test("A16: Frontend static UI is mounted and served", test_ui_served)
 
     # ── Summary ────────────────────────────────────────────────
     total = passed + failed

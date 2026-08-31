@@ -62,6 +62,8 @@ class ScanStatusResponse(BaseModel):
     static_analysis_count: int = 0
     error_message: str = ""
     error_code: str = ""
+    current_stage: str = ""
+    recent_logs: list[str] = Field(default_factory=list)
 
 
 class ScanListResponse(BaseModel):

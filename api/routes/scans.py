@@ -7,6 +7,7 @@ import logging
 import os
 
 from fastapi import APIRouter, HTTPException, status
+from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
 
 from api.schemas.scan import (
     ScanRequest, ScanSummaryResponse, ScanStatusResponse, ScanListResponse,
@@ -188,6 +189,69 @@ async def get_scan_report(scan_id: str):
     )
 
 
+@router.get("/scans/{scan_id}/report/html", response_class=HTMLResponse)
+async def get_scan_report_html(scan_id: str):
+    """View the HTML report in browser or download."""
+    service = _get_service()
+    scan = service.get_scan(scan_id)
+    if not scan:
+        raise HTTPException(status_code=404, detail=f"Scan not found: {scan_id}")
+
+    paths = service.get_report_paths(scan_id)
+    html_path = paths.get("html_path", "")
+    if html_path and os.path.isfile(html_path):
+        with open(html_path, "r", encoding="utf-8", errors="replace") as f:
+            return HTMLResponse(content=f.read())
+
+    # Fallback to search output/reports for matching scan or target
+    reports_dir = os.path.join(_PROJECT_ROOT, "output", "reports")
+    if os.path.isdir(reports_dir):
+        for fname in sorted(os.listdir(reports_dir), reverse=True):
+            if fname.endswith(".html") and scan.target_name in fname:
+                full_p = os.path.join(reports_dir, fname)
+                with open(full_p, "r", encoding="utf-8", errors="replace") as f:
+                    return HTMLResponse(content=f.read())
+
+    raise HTTPException(status_code=404, detail="HTML report not yet generated or found")
+
+
+@router.get("/scans/{scan_id}/report/markdown")
+async def download_scan_report_markdown(scan_id: str):
+    """Download the Markdown report."""
+    service = _get_service()
+    scan = service.get_scan(scan_id)
+    if not scan:
+        raise HTTPException(status_code=404, detail=f"Scan not found: {scan_id}")
+
+    paths = service.get_report_paths(scan_id)
+    md_path = paths.get("md_path", "")
+    if md_path and os.path.isfile(md_path):
+        return FileResponse(md_path, media_type="text/markdown", filename=os.path.basename(md_path))
+
+    reports_dir = os.path.join(_PROJECT_ROOT, "output", "reports")
+    if os.path.isdir(reports_dir):
+        for fname in sorted(os.listdir(reports_dir), reverse=True):
+            if fname.endswith(".md") and scan.target_name in fname:
+                full_p = os.path.join(reports_dir, fname)
+                return FileResponse(full_p, media_type="text/markdown", filename=fname)
+
+    raise HTTPException(status_code=404, detail="Markdown report not found")
+
+
+@router.get("/scans/{scan_id}/report/json")
+async def download_scan_report_json(scan_id: str):
+    """Download the structured JSON report."""
+    service = _get_service()
+    scan = service.get_scan(scan_id)
+    if not scan:
+        raise HTTPException(status_code=404, detail=f"Scan not found: {scan_id}")
+
+    return JSONResponse(
+        content=scan.to_dict(),
+        headers={"Content-Disposition": f'attachment; filename="kavach_report_{scan_id[:8]}.json"'}
+    )
+
+
 # ------------------------------------------------------------------
 # Helpers
 # ------------------------------------------------------------------
@@ -208,6 +272,8 @@ def _scan_to_status(scan) -> ScanStatusResponse:
         static_analysis_count=scan.static_analysis_count,
         error_message=scan.error_message,
         error_code=scan.error_code,
+        current_stage=getattr(scan, "current_stage", ""),
+        recent_logs=getattr(scan, "recent_logs", []),
     )
 
 

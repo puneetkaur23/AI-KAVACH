@@ -199,11 +199,26 @@ class ScanService:
             )
 
         try:
+            def _progress_cb(stage: str, msg: str):
+                now_str = datetime.now(timezone.utc).strftime("%H:%M:%S")
+                with self._lock:
+                    s = self._scans.get(scan_id)
+                    if s:
+                        s.current_stage = stage
+                        s.recent_logs.append(f"[{now_str}] [{stage}] {msg}")
+                        if len(s.recent_logs) > 50:
+                            s.recent_logs = s.recent_logs[-50:]
+
             from kavach import KavachRunner
-            runner = KavachRunner(args)
+            runner = KavachRunner(args, progress_callback=_progress_cb)
             reports = runner.run_target(target_path)
 
             elapsed = time.time() - start_time
+
+            existing_logs = []
+            with self._lock:
+                if scan_id in self._scans:
+                    existing_logs = list(self._scans[scan_id].recent_logs)
 
             scan_result = ScanResult(
                 scan_id=scan_id,
@@ -215,6 +230,8 @@ class ScanService:
                 duration_seconds=round(elapsed, 2),
                 findings=reports if reports else [],
                 crashes_found=len(reports) if reports else 0,
+                current_stage="COMPLETED",
+                recent_logs=existing_logs,
             )
 
             # Store report paths if generated

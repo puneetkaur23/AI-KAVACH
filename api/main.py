@@ -92,7 +92,7 @@ app = FastAPI(
 
 _cors_origins_str = os.getenv(
     "KAVACH_CORS_ORIGINS",
-    "http://localhost:3000,http://localhost:5173,http://localhost:8080"
+    "http://localhost:3000,http://localhost:5173,http://localhost:8080,http://127.0.0.1:3000,http://127.0.0.1:5173,http://127.0.0.1:8080,http://localhost:8000,http://127.0.0.1:8000"
 )
 _cors_origins = [o.strip() for o in _cors_origins_str.split(",") if o.strip()]
 
@@ -100,7 +100,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=_cors_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "DELETE"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
@@ -134,11 +134,38 @@ app.include_router(findings.router)
 
 
 @app.get("/", tags=["System"])
-async def root():
-    """API root — redirect to docs or return info."""
+async def root(request: Request):
+    """
+    API root — serves AI Kavach Frontend UI for browsers/default requests,
+    or returns API metadata JSON for explicit JSON API clients.
+    """
+    accept = request.headers.get("accept", "")
+    # If explicitly requesting JSON without HTML, return API metadata
+    if "application/json" in accept and "text/html" not in accept:
+        return {
+            "name": "AI Kavach CRS API",
+            "version": "1.0.0",
+            "ui": "/",
+            "docs": "/docs",
+            "health": "/health",
+            "endpoints": {
+                "targets": "/api/v1/targets",
+                "scans": "/api/v1/scans",
+                "findings": "/api/v1/findings/{id}",
+            },
+        }
+
+    # Serve the frontend terminal HTML
+    ui_index = os.path.join(_project_root, "frontend", "index.html")
+    if os.path.isfile(ui_index):
+        with open(ui_index, "r", encoding="utf-8") as f:
+            from fastapi.responses import HTMLResponse
+            return HTMLResponse(content=f.read())
+
     return {
         "name": "AI Kavach CRS API",
         "version": "1.0.0",
+        "ui": "/ui",
         "docs": "/docs",
         "health": "/health",
         "endpoints": {
@@ -147,6 +174,13 @@ async def root():
             "findings": "/api/v1/findings/{id}",
         },
     }
+
+
+# Mount static UI at /ui as well for convenience
+from fastapi.staticfiles import StaticFiles
+_frontend_dir = os.path.join(_project_root, "frontend")
+if os.path.isdir(_frontend_dir):
+    app.mount("/ui", StaticFiles(directory=_frontend_dir, html=True), name="ui")
 
 
 # ---------------------------------------------------------------------------

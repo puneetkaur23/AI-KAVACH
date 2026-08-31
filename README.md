@@ -147,73 +147,66 @@ ai-kavach/
     └── kavach.log
 ```
 
-## REST API
+## REST API & Web Frontend
 
-AI Kavach includes a FastAPI backend that wraps the CLI pipeline for frontend integration.
+AI Kavach includes a unified FastAPI backend and an immersive React/Tailwind cybersecurity SOC terminal.
 
-### Start the API Server
+### 1. Launch the Application
 
 ```bash
-# Start Docker containers first
+# Step 1: Start Docker sandbox containers
 docker compose up -d validator fuzzer
 
-# Start the API server (default: http://localhost:8000)
+# Step 2: Start the AI Kavach Backend (serves API + Frontend UI)
 py -3 -m api.main
-
-# Custom host/port
-KAVACH_API_HOST=0.0.0.0 KAVACH_API_PORT=9000 py -3 -m api.main
 ```
 
-### API Endpoints
+### 2. Access AI Kavach
+
+- **Web Frontend Terminal**: http://localhost:8000/ (or http://localhost:8000/ui)
+- **Interactive Swagger Docs**: http://localhost:8000/docs
+- **ReDoc API Reference**: http://localhost:8000/redoc
+- **OpenAPI 3.0 Spec**: http://localhost:8000/openapi.json
+
+*(Optional)* If hosting the frontend on an independent web server (e.g. `http://localhost:3000` or `http://localhost:5173`), CORS is pre-configured to communicate seamlessly with the backend API.
+
+### 3. API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/health` | System health check (Docker status, LLM config) |
-| `GET` | `/api/v1/targets` | List available scan targets |
+| `GET` | `/health` | Live health probe (Docker validator/fuzzer containers & LLM status) |
+| `GET` | `/api/v1/targets` | List available scan targets with metadata |
+| `POST` | `/api/v1/targets/upload` | Upload custom C/C++ source file or archive |
 | `POST` | `/api/v1/scans` | Start a new async security scan |
-| `GET` | `/api/v1/scans` | List all scans with status |
-| `GET` | `/api/v1/scans/{id}` | Get scan status + summary |
-| `POST` | `/api/v1/scans/{id}/cancel` | Cancel a running scan |
-| `GET` | `/api/v1/scans/{id}/findings` | Get findings for a completed scan |
-| `GET` | `/api/v1/scans/{id}/report` | Get structured JSON report |
-| `GET` | `/api/v1/findings/{id}` | Get a specific finding by ID |
+| `GET` | `/api/v1/scans` | List all historical scans |
+| `GET` | `/api/v1/scans/{id}` | Real-time scan telemetry, current stage, and live logs |
+| `POST` | `/api/v1/scans/{id}/cancel` | Gracefully cancel a running scan |
+| `GET` | `/api/v1/scans/{id}/findings` | Get structured vulnerability findings and patch diffs |
+| `GET` | `/api/v1/scans/{id}/report` | Get JSON Proof-of-Fix report metadata |
+| `GET` | `/api/v1/scans/{id}/report/html` | View/Download rendered HTML Proof-of-Fix report |
+| `GET` | `/api/v1/scans/{id}/report/markdown` | Download Markdown report |
+| `GET` | `/api/v1/scans/{id}/report/json` | Download JSON report |
+| `GET` | `/api/v1/findings/{id}` | Get specific finding details by ID |
 
-### Interactive API Docs
-
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-- **OpenAPI Spec**: http://localhost:8000/openapi.json
-
-### Example: Create and Monitor a Scan
+### 4. Example: Full Scan via API / Frontend
 
 ```bash
 # 1. Create scan
 curl -X POST http://localhost:8000/api/v1/scans \
   -H "Content-Type: application/json" \
-  -d '{"target":"targets/vuln_bof","timeout":60}'
-# → {"scan_id":"abc-123","status":"QUEUED",...}
+  -d '{"target":"targets/vuln_bof","timeout":30}'
+# → {"scan_id":"8782aab5-...","status":"QUEUED",...}
 
-# 2. Poll status
-curl http://localhost:8000/api/v1/scans/abc-123
-# → {"status":"RUNNING",...} → {"status":"COMPLETED","findings_count":1,...}
+# 2. Stream real-time status & stage logs
+curl http://localhost:8000/api/v1/scans/8782aab5-...
+# → {"status":"RUNNING","current_stage":"FUZZING","recent_logs":[...]}
 
-# 3. Get findings
-curl http://localhost:8000/api/v1/scans/abc-123/findings
-# → {"findings":[{"severity":"CRITICAL","cwe":{"id":"CWE-121",...},...}]}
+# 3. Fetch verified findings and minimal diff patch
+curl http://localhost:8000/api/v1/scans/8782aab5-.../findings
 
-# 4. Get report
-curl http://localhost:8000/api/v1/scans/abc-123/report
-# → Full structured report JSON
+# 4. View or download HTML Proof-of-Fix report
+curl http://localhost:8000/api/v1/scans/8782aab5-.../report/html
 ```
-
-### Frontend Integration
-
-The API is designed for React/Vue/Angular frontends:
-
-1. **CORS** is pre-configured for `localhost:3000`, `localhost:5173`, `localhost:8080`
-2. Set `KAVACH_CORS_ORIGINS` env var for custom origins (comma-separated)
-3. All responses are structured JSON with consistent error schemas
-4. Scans run asynchronously — poll `GET /api/v1/scans/{id}` for status
 
 ### Environment Variables
 

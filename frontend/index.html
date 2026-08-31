@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI KAVACH - Autonomous Cyber-Reasoning System</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Google Fonts & Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary-fixed": "#7df4ff",
+                "outline-variant": "#3b494b",
+                "inverse-on-surface": "#2d3135",
+                "primary-fixed-dim": "#00dbe9",
+                "surface-bright": "#36393e",
+                "surface-container-highest": "#323539",
+                "on-error-container": "#ffdad6",
+                "tertiary-fixed-dim": "#c8c5cd",
+                "surface-container-high": "#272a2e",
+                "surface-container-lowest": "#0b0f12",
+                "on-primary-fixed": "#002022",
+                "surface-dim": "#101417",
+                "on-secondary-fixed-variant": "#5700c9",
+                "on-primary-container": "#006970",
+                "on-surface": "#e0e2e8",
+                "on-tertiary": "#303036",
+                "on-secondary-fixed": "#23005b",
+                "tertiary": "#f8f4fc",
+                "secondary": "#d1bcff",
+                "inverse-surface": "#e0e2e8",
+                "outline": "#849495",
+                "secondary-fixed-dim": "#d1bcff",
+                "on-primary-fixed-variant": "#004f54",
+                "primary": "#00f0ff",
+                "surface-tint": "#00dbe9",
+                "secondary-container": "#7000ff",
+                "on-tertiary-container": "#5f5e64",
+                "on-surface-variant": "#b9cacb",
+                "background": "#101417",
+                "error": "#ffb4ab",
+                "surface-variant": "#323539",
+                "on-tertiary-fixed": "#1b1b20",
+                "on-tertiary-fixed-variant": "#47464c",
+                "surface": "#101417",
+                "inverse-primary": "#006970",
+                "on-error": "#690005",
+                "on-background": "#e0e2e8",
+                "error-container": "#93000a",
+                "surface-container-low": "#181c20",
+                "primary-container": "#00f0ff",
+                "surface-container": "#1c2024",
+                "secondary-fixed": "#e9ddff",
+                "on-primary": "#00363a",
+                "on-secondary-container": "#ddcdff",
+                "on-secondary": "#3c0090",
+                "tertiary-container": "#dbd8e0",
+                "tertiary-fixed": "#e4e1e9"
+              },
+              fontFamily: {
+                "body-md": ["Hanken Grotesk", "sans-serif"],
+                "display-lg": ["Hanken Grotesk", "sans-serif"],
+                "headline-lg": ["Hanken Grotesk", "sans-serif"],
+                "label-md": ["JetBrains Mono", "monospace"],
+                "label-sm": ["JetBrains Mono", "monospace"],
+                "body-lg": ["Hanken Grotesk", "sans-serif"],
+                "headline-md": ["Hanken Grotesk", "sans-serif"],
+                "code-xs": ["JetBrains Mono", "monospace"]
+              }
+            }
+          }
+        }
+    </script>
+
+    <style>
+        @keyframes scan {
+            0% { top: -10%; opacity: 0; }
+            50% { opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+        
+        .scan-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: rgba(0, 240, 255, 0.5);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+            animation: scan 4s linear infinite;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .glass-panel {
+            background: rgba(16, 20, 23, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .neon-glow {
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+        }
+
+        .pulse-indicator {
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4); }
+            70% { transform: scale(1.08); opacity: 0.8; box-shadow: 0 0 0 8px rgba(0, 240, 255, 0); }
+            100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        ::-webkit-scrollbar-thumb { background: #3b494b; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00dbe9; }
+
+        .terminal-bg {
+            background-color: #0b0f12;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="dark bg-background text-on-background font-body-md selection:bg-primary-fixed/30 selection:text-primary-fixed overflow-hidden">
+    <div id="root">
+        <!-- Fallback if JS fails -->
+        <div class="h-screen w-screen flex flex-col items-center justify-center text-center p-6 terminal-bg text-on-surface">
+            <div class="w-12 h-12 rounded-full border-2 border-primary-fixed border-t-transparent animate-spin mb-4"></div>
+            <h2 class="text-xl font-bold text-primary-fixed mb-1">AI KAVACH — Initializing Terminal</h2>
+            <p class="text-xs text-on-surface-variant font-mono">Loading React Engine and Cyber-Reasoning Modules...</p>
+        </div>
+    </div>
+
+    <!-- React 18 & Babel 7 Standalone -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.4/babel.min.js"></script>
+
+    <script type="text/babel" data-presets="react">
+        const { useState, useEffect, useRef, createContext, useContext } = React;
+        const { createRoot } = ReactDOM;
+
+        // --- Configurable Backend Origin ---
+        const API_BASE = window.API_BASE_URL || (window.location.origin.includes('http') ? window.location.origin : 'http://localhost:8000');
+
+        // --- API Client Layer ---
+        const api = {
+            async fetch(path, options = {}) {
+                const url = `${API_BASE}${path}`;
+                try {
+                    const res = await fetch(url, options);
+                    if (!res.ok) {
+                        let errDetail = res.statusText;
+                        try {
+                            const errJson = await res.json();
+                            errDetail = errJson.detail || (errJson.error && errJson.error.message) || JSON.stringify(errJson);
+                        } catch (_) {}
+                        throw new Error(`HTTP ${res.status}: ${errDetail}`);
+                    }
+                    const contentType = res.headers.get("content-type") || "";
+                    if (contentType.includes("application/json")) {
+                        return await res.json();
+                    }
+                    return await res.text();
+                } catch (err) {
+                    console.warn(`[API Call] ${path} error:`, err.message);
+                    throw err;
+                }
+            },
+
+            getHealth() {
+                return this.fetch("/health");
+            },
+
+            getTargets() {
+                return this.fetch("/api/v1/targets");
+            },
+
+            async uploadTarget(file, targetName = "") {
+                const formData = new FormData();
+                formData.append("file", file);
+                if (targetName) formData.append("target_name", targetName);
+                return this.fetch("/api/v1/targets/upload", {
+                    method: "POST",
+                    body: formData,
+                });
+            },
+
+            startScan(payload) {
+                return this.fetch("/api/v1/scans", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+            },
+
+            getScans() {
+                return this.fetch("/api/v1/scans");
+            },
+
+            getScanStatus(scanId) {
+                return this.fetch(`/api/v1/scans/${scanId}`);
+            },
+
+            cancelScan(scanId) {
+                return this.fetch(`/api/v1/scans/${scanId}/cancel`, { method: "POST" });
+            },
+
+            getScanFindings(scanId) {
+                return this.fetch(`/api/v1/scans/${scanId}/findings`);
+            },
+
+            getScanReport(scanId) {
+                return this.fetch(`/api/v1/scans/${scanId}/report`);
+            },
+
+            getReportHtmlUrl(scanId) {
+                return `${API_BASE}/api/v1/scans/${scanId}/report/html`;
+            },
+
+            getReportMarkdownUrl(scanId) {
+                return `${API_BASE}/api/v1/scans/${scanId}/report/markdown`;
+            },
+
+            getReportJsonUrl(scanId) {
+                return `${API_BASE}/api/v1/scans/${scanId}/report/json`;
+            }
+        };
+
+        // --- Navigation Context & App State ---
+        const AppContext = createContext(null);
+
+        const AppProvider = ({ children }) => {
+            // Hash router state
+            const getInitialRoute = () => {
+                const hash = window.location.hash.replace('#', '') || '/';
+                return hash;
+            };
+
+            const [currentRoute, setCurrentRoute] = useState(getInitialRoute);
+            const [health, setHealth] = useState({ status: "checking", docker_validator: "unknown", docker_fuzzer: "unknown", llm_provider: "google" });
+            const [activeScanId, setActiveScanId] = useState(null);
+            const [targets, setTargets] = useState([]);
+            const [recentScans, setRecentScans] = useState([]);
+
+            const navigate = (path) => {
+                window.location.hash = path;
+                setCurrentRoute(path);
+            };
+
+            useEffect(() => {
+                const handleHashChange = () => {
+                    setCurrentRoute(getInitialRoute());
+                };
+                window.addEventListener('hashchange', handleHashChange);
+                return () => window.removeEventListener('hashchange', handleHashChange);
+            }, []);
+
+            const refreshHealth = async () => {
+                try {
+                    const data = await api.getHealth();
+                    setHealth(data);
+                } catch (e) {
+                    setHealth({ status: "offline", docker_validator: "unreachable", docker_fuzzer: "unreachable", error: e.message });
+                }
+            };
+
+            const refreshTargets = async () => {
+                try {
+                    const data = await api.getTargets();
+                    if (data && data.targets) setTargets(data.targets);
+                } catch (e) {}
+            };
+
+            const refreshScans = async () => {
+                try {
+                    const data = await api.getScans();
+                    if (data && data.scans) setRecentScans(data.scans);
+                } catch (e) {}
+            };
+
+            useEffect(() => {
+                refreshHealth();
+                refreshTargets();
+                refreshScans();
+                const interval = setInterval(() => {
+                    refreshHealth();
+                    refreshScans();
+                }, 6000);
+                return () => clearInterval(interval);
+            }, []);
+
+            return (
+                <AppContext.Provider value={{
+                    currentRoute,
+                    navigate,
+                    health,
+                    refreshHealth,
+                    activeScanId,
+                    setActiveScanId,
+                    targets,
+                    refreshTargets,
+                    recentScans,
+                    refreshScans
+                }}>
+                    {children}
+                </AppContext.Provider>
+            );
+        };
+
+        const useApp = () => useContext(AppContext);
+
+        // --- Shared Components ---
+
+        const SideNavBar = () => {
+            const { currentRoute, navigate } = useApp();
+
+            const navItems = [
+                { path: "/dashboard", label: "Dashboard", icon: "dashboard" },
+                { path: "/analyze", label: "Analyze Target", icon: "biotech" },
+                { path: "/mission-control", label: "Mission Control", icon: "satellite_alt" },
+                { path: "/findings", label: "Findings & Fixes", icon: "security" },
+                { path: "/docs", label: "API Docs", icon: "description", external: `${API_BASE}/docs` }
+            ];
+
+            return (
+                <nav className="h-screen w-64 fixed left-0 top-0 z-[60] border-r border-white/10 shadow-2xl bg-surface-container-lowest/95 backdrop-blur-2xl flex flex-col py-6">
+                    <div className="px-6 mb-8 flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
+                        <div className="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center border border-white/5 relative overflow-hidden">
+                            <span className="material-symbols-outlined text-primary-fixed">shield</span>
+                            <div className="absolute inset-0 bg-primary-fixed/10 animate-pulse"></div>
+                        </div>
+                        <div>
+                            <h1 className="text-[17px] font-black text-primary-fixed tracking-wider uppercase">AI KAVACH</h1>
+                            <p className="font-mono text-[10px] text-on-surface-variant tracking-widest uppercase">CRS Terminal v1.0</p>
+                        </div>
+                    </div>
+
+                    <div className="px-4 mb-6">
+                        <button 
+                            onClick={() => navigate('/analyze')}
+                            className="w-full py-3 px-4 rounded bg-primary-fixed text-on-primary-fixed font-bold shadow-[0_0_15px_rgba(0,219,233,0.3)] hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 text-xs uppercase tracking-wider font-mono"
+                        >
+                            <span className="material-symbols-outlined text-[18px]">radar</span>
+                            Initiate Scan
+                        </button>
+                    </div>
+
+                    <div className="flex-1 overflow-y-auto px-2 space-y-1">
+                        {navItems.map((item) => (
+                            item.external ? (
+                                <a 
+                                    key={item.label}
+                                    href={item.external}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="flex items-center gap-3 px-3.5 py-2.5 rounded transition-all text-xs font-mono text-on-surface-variant hover:text-on-surface hover:bg-white/5"
+                                >
+                                    <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
+                                    {item.label}
+                                    <span className="material-symbols-outlined text-[14px] ml-auto opacity-50">open_in_new</span>
+                                </a>
+                            ) : (
+                                <button 
+                                    key={item.label}
+                                    onClick={() => navigate(item.path)} 
+                                    className={`w-full text-left flex items-center gap-3 px-3.5 py-2.5 rounded transition-all text-xs font-mono ${currentRoute === item.path ? 'bg-primary-fixed/15 text-primary-fixed border-l-2 border-primary-fixed font-bold shadow-[inset_8px_0_12px_-8px_rgba(0,219,233,0.4)]' : 'text-on-surface-variant hover:text-on-surface hover:bg-white/5'}`}
+                                >
+                                    <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
+                                    {item.label}
+                                </button>
+                            )
+                        ))}
+                    </div>
+
+                    <div className="mt-auto px-4 pt-4 border-t border-white/5">
+                        <div className="p-2.5 rounded bg-surface-container-high/50 text-[11px] text-on-surface-variant">
+                            <div className="font-bold text-on-surface mb-1 flex items-center gap-1.5 font-mono text-[10px]">
+                                <span className="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span> ACTIVE BACKEND
+                            </div>
+                            <div className="font-mono truncate text-[10px] text-outline">{API_BASE}</div>
+                        </div>
+                    </div>
+                </nav>
+            );
+        };
+
+        const TopAppBar = ({ title }) => {
+            const { health, refreshHealth } = useApp();
+
+            const isHealthy = health.status === "healthy";
+            const isDegraded = health.status === "degraded";
+
+            return (
+                <header className="bg-surface-dim/80 backdrop-blur-xl w-[calc(100%-16rem)] ml-64 sticky top-0 z-50 border-b border-white/10 shadow-[0_0_15px_rgba(0,219,233,0.05)] flex items-center justify-between px-6 h-[64px]">
+                    <div className="flex items-center gap-4">
+                        <span className="text-lg font-bold tracking-tight text-primary-fixed neon-glow uppercase font-mono">
+                            {title || 'AI KAVACH'}
+                        </span>
+                    </div>
+
+                    {/* Live System Health Badge */}
+                    <div className="flex items-center gap-3">
+                        <button 
+                            onClick={refreshHealth}
+                            title={`Docker Validator: ${health.docker_validator} | Docker Fuzzer: ${health.docker_fuzzer} | LLM: ${health.llm_provider}`}
+                            className={`px-3 py-1 rounded-full border text-[11px] font-mono flex items-center gap-2 transition-all ${isHealthy ? 'bg-primary-fixed/10 border-primary-fixed/30 text-primary-fixed' : isDegraded ? 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400' : 'bg-error/10 border-error/30 text-error'}`}
+                        >
+                            <span className={`w-2 h-2 rounded-full ${isHealthy ? 'bg-primary-fixed pulse-indicator' : isDegraded ? 'bg-yellow-400' : 'bg-error animate-pulse'}`}></span>
+                            <span>BACKEND: {health.status ? health.status.toUpperCase() : 'OFFLINE'}</span>
+                        </button>
+
+                        <a 
+                            href={`${API_BASE}/docs`} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            className="px-3 py-1 text-[11px] font-mono border border-white/10 rounded text-on-surface-variant hover:text-primary-fixed hover:border-primary-fixed/30 transition-all flex items-center gap-1"
+                        >
+                            <span className="material-symbols-outlined text-[14px]">api</span>
+                            Swagger Docs
+                        </a>
+                    </div>
+                </header>
+            );
+        };
+
+        const Footer = () => (
+            <footer className="bg-surface-dim/50 w-[calc(100%-16rem)] ml-64 py-2 px-6 border-t border-white/5 flex justify-between items-center text-on-surface-variant text-[11px] font-mono">
+                <div className="text-primary-fixed">© 2026 AI KAVACH — Autonomous Cyber-Reasoning System</div>
+                <div className="flex items-center gap-6">
+                    <span>Engine: <span className="text-primary-fixed">AFL++ / ASan</span></span>
+                    <span>Reasoning: <span className="text-primary-fixed">Gemini CRS</span></span>
+                    <span>v1.0.0</span>
+                </div>
+            </footer>
+        );
+
+        // --- Screen: Landing Page ---
+
+        const LandingPage = () => {
+            const { navigate } = useApp();
+            const [text1, setText1] = useState("");
+            const [text2, setText2] = useState("");
+            const line1 = "Autonomous Vulnerability";
+            const line2 = "Discovery & Proven Fixes";
+
+            useEffect(() => {
+                let i = 0, j = 0;
+                const timer1 = setInterval(() => {
+                    if (i < line1.length) {
+                        setText1(prev => prev + line1.charAt(i));
+                        i++;
+                    } else {
+                        clearInterval(timer1);
+                        const timer2 = setInterval(() => {
+                            if (j < line2.length) {
+                                setText2(prev => prev + line2.charAt(j));
+                                j++;
+                            } else {
+                                clearInterval(timer2);
+                            }
+                        }, 35);
+                    }
+                }, 35);
+                return () => clearInterval(timer1);
+            }, []);
+
+            return (
+                <div className="min-h-screen terminal-bg flex flex-col items-center justify-center relative overflow-hidden">
+                    <div className="scan-overlay opacity-30"></div>
+
+                    <div className="z-10 flex flex-col items-center text-center px-4 max-w-4xl">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary-fixed/40 bg-primary-fixed/5 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(0,240,255,0.1)]">
+                            <span className="w-2 h-2 rounded-full bg-primary-fixed pulse-indicator"></span>
+                            <span className="text-xs text-primary-fixed tracking-widest font-mono uppercase">CRS Pipeline Armed & Ready</span>
+                        </div>
+                        
+                        <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6 tracking-tight">
+                            <span className="block text-on-surface">{text1}</span>
+                            <span className="text-primary-fixed neon-glow">{text2}<span className="inline-block w-3 h-[0.9em] bg-primary-fixed animate-pulse ml-2 align-baseline"></span></span>
+                        </h1>
+
+                        <p className="text-on-surface-variant max-w-2xl mb-12 text-sm md:text-base leading-relaxed">
+                            Coverage-Guided Fuzzing (AFL++) • Static AST Triage (Semgrep) • LLM Root-Cause Reasoning • Sandboxed Patch Verification • Proof-of-Fix Reporting.
+                        </p>
+
+                        <div className="flex flex-wrap items-center justify-center gap-5 font-mono text-xs">
+                            <button onClick={() => navigate('/analyze')} className="bg-primary-fixed text-on-primary-fixed font-bold px-8 py-4 rounded shadow-[0_0_25px_rgba(0,240,255,0.35)] hover:scale-105 active:scale-95 transition-all flex items-center gap-3 uppercase tracking-wider">
+                                <span className="material-symbols-outlined text-[18px]">terminal</span>
+                                Launch Security Scan
+                            </button>
+                            <button onClick={() => navigate('/dashboard')} className="border border-primary-fixed/50 text-primary-fixed font-bold px-8 py-4 rounded backdrop-blur-sm hover:bg-primary-fixed/10 active:scale-95 transition-all flex items-center gap-3 uppercase tracking-wider">
+                                <span className="material-symbols-outlined text-[18px]">visibility</span>
+                                View Telemetry
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl px-6 z-10">
+                        {[
+                            { label: "> Fuzzing Engine", val: "AFL++ 4.0 / ASan", icon: "bug_report" },
+                            { label: "> LLM Reasoning", val: "Gemini CRS", icon: "psychology" },
+                            { label: "> Sandbox Validator", val: "Docker Container", icon: "verified_user" }
+                        ].map((stat, idx) => (
+                            <div key={idx} className="glass-panel p-5 rounded-xl border-primary-fixed/10 hover:border-primary-fixed/40 transition-all">
+                                <span className="material-symbols-outlined text-primary-fixed mb-2 text-2xl">{stat.icon}</span>
+                                <div className="text-xl font-bold text-on-surface mb-1 font-mono">{stat.val}</div>
+                                <div className="font-mono text-xs text-outline">{stat.label}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen: Dashboard ---
+
+        const Dashboard = () => {
+            const { recentScans, targets, health, setActiveScanId, navigate } = useApp();
+
+            const totalFindings = recentScans.reduce((acc, s) => acc + (s.findings_count || 0), 0);
+            const totalProvenFixes = recentScans.reduce((acc, s) => acc + (s.proven_fixes || 0), 0);
+            const totalCrashes = recentScans.reduce((acc, s) => acc + (s.crashes_found || 0), 0);
+
+            return (
+                <div className="flex h-screen overflow-hidden terminal-bg">
+                    <SideNavBar />
+                    <div className="flex-1 flex flex-col">
+                        <TopAppBar title="AI KAVACH SOC DASHBOARD" />
+                        <main className="flex-1 overflow-y-auto p-8 ml-64">
+                            <div className="flex items-end justify-between mb-8">
+                                <div>
+                                    <h2 className="text-3xl font-black text-on-surface">System Telemetry</h2>
+                                    <p className="text-xs text-on-surface-variant mt-1 font-mono">Autonomous vulnerability detection & patch verification metrics.</p>
+                                </div>
+                                <div className="font-mono text-xs text-outline flex items-center gap-2">
+                                    <span className="w-2 h-2 bg-primary-fixed rounded-full pulse-indicator"></span>
+                                    REAL-TIME CRS ENGINE CONNECTED
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-12 gap-6 mb-6">
+                                {/* Metrics Cards */}
+                                <div className="col-span-12 grid grid-cols-4 gap-6">
+                                    <div className="glass-panel rounded-xl p-5 border-primary-fixed/30 shadow-[0_0_10px_rgba(0,219,233,0.08)]">
+                                        <span className="text-[11px] text-outline uppercase tracking-wider font-mono">Vulnerabilities Detected</span>
+                                        <div className="text-3xl font-bold text-error mt-2 font-mono">{totalFindings} <span className="text-xs font-normal text-error/70">Found</span></div>
+                                    </div>
+                                    <div className="glass-panel rounded-xl p-5">
+                                        <span className="text-[11px] text-outline uppercase tracking-wider font-mono">Available Targets</span>
+                                        <div className="text-3xl font-bold text-on-surface mt-2 font-mono">{targets.length} <span className="text-xs font-normal text-primary-fixed">Ready</span></div>
+                                    </div>
+                                    <div className="glass-panel rounded-xl p-5">
+                                        <span className="text-[11px] text-outline uppercase tracking-wider font-mono">Proven Fixes</span>
+                                        <div className="text-3xl font-bold text-primary-fixed neon-glow mt-2 font-mono">{totalProvenFixes} <span className="text-xs font-normal text-outline">Validated</span></div>
+                                    </div>
+                                    <div className="glass-panel rounded-xl p-5">
+                                        <span className="text-[11px] text-outline uppercase tracking-wider font-mono">Crashes Triaged</span>
+                                        <div className="text-3xl font-bold text-secondary mt-2 font-mono">{totalCrashes} <span className="text-xs font-normal text-outline">Inputs</span></div>
+                                    </div>
+                                </div>
+
+                                {/* Active Targets Overview */}
+                                <div className="col-span-8 glass-panel rounded-xl p-6 min-h-[320px]">
+                                    <div className="flex justify-between items-center mb-5">
+                                        <h3 className="text-base font-bold text-on-surface flex items-center gap-2 font-mono">
+                                            <span className="material-symbols-outlined text-primary-fixed">folder_open</span>
+                                            Available Target Workspaces
+                                        </h3>
+                                        <button onClick={() => navigate('/analyze')} className="text-xs text-primary-fixed hover:underline font-mono">
+                                            + Add / Scan Target
+                                        </button>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-3">
+                                        {targets.map((t, idx) => (
+                                            <div 
+                                                key={idx} 
+                                                onClick={() => navigate('/analyze')}
+                                                className="bg-surface-container-high/40 hover:bg-primary-fixed/10 border border-white/5 hover:border-primary-fixed/30 rounded-lg p-3.5 cursor-pointer transition-all"
+                                            >
+                                                <div className="flex justify-between items-start mb-1">
+                                                    <span className="font-bold text-sm text-on-surface font-mono">{t.name}</span>
+                                                    {t.has_tests && <span className="text-[9px] bg-primary-fixed/10 text-primary-fixed px-1.5 py-0.5 rounded border border-primary-fixed/20 font-mono">TESTS</span>}
+                                                </div>
+                                                <div className="text-[11px] text-on-surface-variant font-mono truncate">
+                                                    Files: {t.source_files.join(', ') || 'C source'}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Execution Nodes Area */}
+                                <div className="col-span-4 glass-panel rounded-xl p-6">
+                                    <h3 className="text-base font-bold mb-4 flex justify-between items-center font-mono">
+                                        CRS Execution Nodes
+                                        <span className="text-[10px] px-2 py-0.5 bg-primary-fixed/10 text-primary-fixed border border-primary-fixed/20 rounded uppercase tracking-widest">Docker</span>
+                                    </h3>
+                                    <div className="space-y-4 font-mono text-xs">
+                                        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+                                            <span className="text-on-surface-variant">Docker Sandbox</span>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-outline">{health.docker_validator}</span>
+                                                <span className={`w-2 h-2 rounded-full ${health.docker_validator === 'running' ? 'bg-primary-fixed' : 'bg-error animate-pulse'}`}></span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+                                            <span className="text-on-surface-variant">Docker AFL++ Fuzzer</span>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-outline">{health.docker_fuzzer}</span>
+                                                <span className={`w-2 h-2 rounded-full ${health.docker_fuzzer === 'running' ? 'bg-primary-fixed' : 'bg-error animate-pulse'}`}></span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+                                            <span className="text-on-surface-variant">LLM Reasoning</span>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-primary-fixed">{health.llm_provider ? health.llm_provider.toUpperCase() : 'GOOGLE'}</span>
+                                                <span className="w-2 h-2 rounded-full bg-primary-fixed"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Scan History Table */}
+                            <div className="glass-panel rounded-xl p-6">
+                                <div className="flex justify-between items-center mb-4">
+                                    <h3 className="text-base font-bold text-on-surface font-mono">Recent Autonomous Scans</h3>
+                                    <button onClick={() => navigate('/analyze')} className="text-xs text-primary-fixed hover:underline font-mono">Start New Scan</button>
+                                </div>
+                                <div className="overflow-x-auto">
+                                    {recentScans.length === 0 ? (
+                                        <div className="text-center py-8 text-on-surface-variant text-xs font-mono">
+                                            No scans recorded yet. Click "Initiate Scan" to run an autonomous security assessment.
+                                        </div>
+                                    ) : (
+                                        <table className="w-full text-left border-collapse">
+                                            <thead>
+                                                <tr className="border-b border-white/10 text-xs text-outline uppercase font-mono">
+                                                    <th className="py-2.5 px-4">Scan ID</th>
+                                                    <th className="py-2.5 px-4">Target</th>
+                                                    <th className="py-2.5 px-4">Status</th>
+                                                    <th className="py-2.5 px-4">Findings</th>
+                                                    <th className="py-2.5 px-4">Proven Fixes</th>
+                                                    <th className="py-2.5 px-4">Duration</th>
+                                                    <th className="py-2.5 px-4 text-right">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="text-xs text-on-surface-variant font-mono">
+                                                {recentScans.map((s, idx) => (
+                                                    <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                                        <td className="py-3 px-4 text-primary-fixed font-bold">{s.scan_id ? s.scan_id.slice(0, 8) : ''}</td>
+                                                        <td className="py-3 px-4 text-on-surface font-bold">{s.target_name || s.target}</td>
+                                                        <td className="py-3 px-4">
+                                                            <span className={`px-2 py-0.5 rounded text-[10px] border ${s.status === 'COMPLETED' ? 'bg-primary-fixed/10 text-primary-fixed border-primary-fixed/30' : s.status === 'RUNNING' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30' : 'bg-error/10 text-error border-error/30'}`}>
+                                                                {s.status}
+                                                            </span>
+                                                        </td>
+                                                        <td className="py-3 px-4">{s.findings_count}</td>
+                                                        <td className="py-3 px-4 text-primary-fixed">{s.proven_fixes}</td>
+                                                        <td className="py-3 px-4">{s.duration_seconds}s</td>
+                                                        <td className="py-3 px-4 text-right">
+                                                            <button 
+                                                                onClick={() => {
+                                                                    setActiveScanId(s.scan_id);
+                                                                    if (s.status === 'RUNNING' || s.status === 'QUEUED') {
+                                                                        navigate('/mission-control');
+                                                                    } else {
+                                                                        navigate('/findings');
+                                                                    }
+                                                                }}
+                                                                className="px-2.5 py-1 text-[11px] rounded bg-surface-container-highest hover:bg-primary-fixed hover:text-on-primary-fixed transition-all"
+                                                            >
+                                                                {s.status === 'RUNNING' ? 'Watch' : 'View Fixes'}
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    )}
+                                </div>
+                            </div>
+                        </main>
+                        <Footer />
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen: Analyze Setup ---
+
+        const AnalyzeSetup = () => {
+            const { targets, refreshTargets, setActiveScanId, navigate } = useApp();
+            const [selectedTarget, setSelectedTarget] = useState("targets/vuln_bof");
+            const [timeoutSecs, setTimeoutSecs] = useState(30);
+            const [llmProvider, setLlmProvider] = useState("google");
+            const [maxRetries, setMaxRetries] = useState(3);
+            const [skipFuzzing, setSkipFuzzing] = useState(false);
+            const [isDragging, setIsDragging] = useState(false);
+            const [isUploading, setIsUploading] = useState(false);
+            const [isStarting, setIsStarting] = useState(false);
+            const fileInputRef = useRef(null);
+
+            const handleFileUpload = async (file) => {
+                if (!file) return;
+                setIsUploading(true);
+                try {
+                    const uploaded = await api.uploadTarget(file);
+                    await refreshTargets();
+                    setSelectedTarget(uploaded.path);
+                } catch (err) {
+                    alert(`Target upload failed: ${err.message}`);
+                } finally {
+                    setIsUploading(false);
+                }
+            };
+
+            const handleCommenceScan = async () => {
+                if (!selectedTarget) {
+                    alert("Please select a valid scan target.");
+                    return;
+                }
+                setIsStarting(true);
+                try {
+                    const scanReq = {
+                        target: selectedTarget,
+                        timeout: Number(timeoutSecs),
+                        llm_provider: llmProvider,
+                        max_retries: Number(maxRetries),
+                        skip_fuzzing: skipFuzzing
+                    };
+                    const res = await api.startScan(scanReq);
+                    setActiveScanId(res.scan_id);
+                    navigate('/mission-control');
+                } catch (err) {
+                    alert(`Failed to initiate scan: ${err.message}`);
+                } finally {
+                    setIsStarting(false);
+                }
+            };
+
+            return (
+                <div className="flex h-screen terminal-bg">
+                    <SideNavBar />
+                    <div className="flex-1 flex flex-col">
+                        <TopAppBar title="TARGET ACQUISITION & SCAN SETUP" />
+                        <main className="flex-1 overflow-y-auto p-8 ml-64 pb-20">
+                            <div className="max-w-5xl mx-auto space-y-6">
+                                <div className="flex justify-between items-end gap-4">
+                                    <div>
+                                        <div className="text-primary-fixed text-xs font-bold uppercase tracking-wider mb-1 font-mono flex items-center gap-2">
+                                            <span className="w-2 h-2 rounded-full bg-primary-fixed shadow-[0_0_8px_#00f0ff] animate-pulse"></span>
+                                            Autonomous CRS Dispatcher
+                                        </div>
+                                        <h2 className="text-3xl font-black text-on-surface">Target Setup</h2>
+                                        <p className="text-on-surface-variant text-xs font-mono mt-1">Deploy the Cognitive Reasoning System against C/C++ target programs.</p>
+                                    </div>
+                                    <button 
+                                        onClick={() => {
+                                            setSelectedTarget("targets/vuln_bof");
+                                            setTimeoutSecs(30);
+                                        }} 
+                                        className="px-4 py-2 border border-primary-fixed text-primary-fixed rounded hover:bg-primary-fixed/10 transition-colors font-bold text-xs flex items-center gap-2 uppercase tracking-wider font-mono"
+                                    >
+                                        <span className="material-symbols-outlined text-[16px]">bolt</span>
+                                        Select Demo Target (vuln_bof)
+                                    </button>
+                                </div>
+
+                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                                    {/* Left: Target Selection & Upload */}
+                                    <div className="lg:col-span-8 space-y-5">
+                                        {/* Drag & Drop Upload Zone */}
+                                        <div 
+                                            className={`glass-panel rounded-xl p-6 border-2 border-dashed transition-all flex flex-col items-center justify-center min-h-[220px] cursor-pointer relative overflow-hidden ${isDragging ? 'border-primary-fixed bg-primary-fixed/5' : 'border-white/10 hover:border-primary-fixed/50'}`}
+                                            onDragEnter={() => setIsDragging(true)}
+                                            onDragLeave={() => setIsDragging(false)}
+                                            onDragOver={(e) => e.preventDefault()}
+                                            onDrop={(e) => {
+                                                e.preventDefault();
+                                                setIsDragging(false);
+                                                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                                                    handleFileUpload(e.dataTransfer.files[0]);
+                                                }
+                                            }}
+                                            onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                                        >
+                                            <input 
+                                                type="file" 
+                                                ref={fileInputRef} 
+                                                className="hidden" 
+                                                accept=".c,.cpp,.h,.zip"
+                                                onChange={(e) => {
+                                                    if (e.target.files && e.target.files[0]) {
+                                                        handleFileUpload(e.target.files[0]);
+                                                    }
+                                                }}
+                                            />
+                                            <div className="w-14 h-14 rounded-full bg-surface-container-high border border-white/5 flex items-center justify-center mb-3">
+                                                <span className="material-symbols-outlined text-3xl text-primary-fixed">cloud_upload</span>
+                                            </div>
+                                            <h3 className="text-base font-bold mb-1 font-mono">{isUploading ? 'Uploading & Preparing Target...' : 'Drag & Drop Custom Source / Archive'}</h3>
+                                            <p className="text-on-surface-variant text-center max-w-md text-xs font-mono">Supports single C/C++ files or .zip archives with Makefile & sources.</p>
+                                        </div>
+
+                                        {/* Target Selection Grid */}
+                                        <div className="glass-panel rounded-xl p-5 space-y-3">
+                                            <h3 className="text-primary-fixed text-xs font-bold uppercase tracking-widest flex items-center gap-2 border-b border-white/5 pb-2 font-mono">
+                                                <span className="material-symbols-outlined text-sm">inventory_2</span> Discovered Target Repositories
+                                            </h3>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                {targets.map((t, idx) => (
+                                                    <div 
+                                                        key={idx}
+                                                        onClick={() => setSelectedTarget(t.path)}
+                                                        className={`p-3 rounded-lg border cursor-pointer transition-all ${selectedTarget === t.path ? 'bg-primary-fixed/15 border-primary-fixed shadow-[0_0_12px_rgba(0,219,233,0.15)]' : 'bg-surface-container/40 border-white/5 hover:border-white/20'}`}
+                                                    >
+                                                        <div className="flex justify-between items-center mb-1">
+                                                            <span className="font-bold text-xs font-mono text-on-surface">{t.name}</span>
+                                                            <span className={`w-3 h-3 rounded-full border ${selectedTarget === t.path ? 'bg-primary-fixed border-primary-fixed' : 'border-white/20'}`}></span>
+                                                        </div>
+                                                        <div className="text-[10px] text-on-surface-variant font-mono truncate">
+                                                            Path: {t.path}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Right: Scan Parameters Configuration */}
+                                    <div className="lg:col-span-4 glass-panel rounded-xl p-6 border-t-2 border-t-primary-fixed flex flex-col justify-between">
+                                        <div className="space-y-5">
+                                            <h3 className="text-sm font-bold flex items-center gap-2 font-mono uppercase tracking-wider">
+                                                <span className="material-symbols-outlined text-primary-fixed">tune</span> Pipeline Controls
+                                            </h3>
+
+                                            {/* Active Selection */}
+                                            <div className="p-3 bg-surface-container-lowest border border-white/10 rounded font-mono text-xs">
+                                                <span className="text-outline block text-[9px] uppercase">Active Target:</span>
+                                                <span className="text-primary-fixed font-bold truncate block">{selectedTarget}</span>
+                                            </div>
+
+                                            {/* Timeout */}
+                                            <div>
+                                                <div className="flex justify-between mb-1 text-xs font-bold font-mono">
+                                                    <span className="text-on-surface-variant">AFL++ TIMEOUT</span>
+                                                    <span className="text-primary-fixed">{timeoutSecs}s</span>
+                                                </div>
+                                                <input 
+                                                    type="range" 
+                                                    min="10" 
+                                                    max="180" 
+                                                    step="5"
+                                                    value={timeoutSecs} 
+                                                    onChange={(e) => setTimeoutSecs(e.target.value)}
+                                                    className="w-full accent-primary-fixed h-1.5 bg-surface-container-highest rounded-full" 
+                                                />
+                                            </div>
+
+                                            {/* LLM Provider */}
+                                            <div>
+                                                <label className="text-[10px] text-on-surface-variant uppercase font-bold block mb-1 font-mono">Reasoning LLM</label>
+                                                <select 
+                                                    value={llmProvider} 
+                                                    onChange={(e) => setLlmProvider(e.target.value)}
+                                                    className="w-full bg-surface-container border border-white/10 rounded px-3 py-2 text-xs text-on-surface focus:border-primary-fixed outline-none font-mono"
+                                                >
+                                                    <option value="google">Google Gemini (Gemini 2.5 Flash / Pro)</option>
+                                                    <option value="openai">OpenAI (GPT-4o)</option>
+                                                    <option value="ollama">Ollama Local (qwen2.5-coder / llama3)</option>
+                                                </select>
+                                            </div>
+
+                                            {/* Max Retries */}
+                                            <div>
+                                                <label className="text-[10px] text-on-surface-variant uppercase font-bold block mb-1 font-mono">Max Patch Retries</label>
+                                                <select 
+                                                    value={maxRetries} 
+                                                    onChange={(e) => setMaxRetries(e.target.value)}
+                                                    className="w-full bg-surface-container border border-white/10 rounded px-3 py-2 text-xs text-on-surface focus:border-primary-fixed outline-none font-mono"
+                                                >
+                                                    <option value="1">1 Attempt</option>
+                                                    <option value="3">3 Attempts (Standard)</option>
+                                                    <option value="5">5 Attempts</option>
+                                                </select>
+                                            </div>
+
+                                            {/* Skip Fuzzing Toggle */}
+                                            <div className="flex items-center justify-between p-3 rounded bg-surface-container/50 border border-white/5">
+                                                <div>
+                                                    <span className="text-xs font-bold text-on-surface block font-mono">Replay Crashes</span>
+                                                    <span className="text-[10px] text-on-surface-variant font-mono">Skip AFL++ fuzz phase</span>
+                                                </div>
+                                                <input 
+                                                    type="checkbox" 
+                                                    checked={skipFuzzing} 
+                                                    onChange={(e) => setSkipFuzzing(e.target.checked)}
+                                                    className="w-4 h-4 accent-primary-fixed rounded" 
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <button 
+                                            onClick={handleCommenceScan}
+                                            disabled={isStarting}
+                                            className="w-full mt-6 py-3.5 bg-primary-fixed text-on-primary-fixed font-bold rounded shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 uppercase tracking-wider text-xs font-mono disabled:opacity-50"
+                                        >
+                                            <span className="material-symbols-outlined text-[18px]">{isStarting ? 'hourglass_top' : 'play_arrow'}</span>
+                                            {isStarting ? 'Queuing Scan...' : 'Commence Analysis'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                        <Footer />
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen: Live Analysis Mission Control ---
+
+        const LiveAnalysis = () => {
+            const { activeScanId, setActiveScanId, navigate } = useApp();
+            const [scanData, setScanData] = useState(null);
+            const [isCancelling, setIsCancelling] = useState(false);
+            const logEndRef = useRef(null);
+
+            useEffect(() => {
+                let interval;
+                if (activeScanId) {
+                    const poll = async () => {
+                        try {
+                            const data = await api.getScanStatus(activeScanId);
+                            setScanData(data);
+                        } catch (err) {}
+                    };
+                    poll();
+                    interval = setInterval(poll, 1500);
+                }
+                return () => clearInterval(interval);
+            }, [activeScanId]);
+
+            // Auto-scroll terminal logs
+            useEffect(() => {
+                if (logEndRef.current) {
+                    logEndRef.current.scrollIntoView({ behavior: "smooth" });
+                }
+            }, [scanData && scanData.recent_logs]);
+
+            const handleCancel = async () => {
+                if (!activeScanId) return;
+                setIsCancelling(true);
+                try {
+                    await api.cancelScan(activeScanId);
+                } catch (e) {} finally {
+                    setIsCancelling(false);
+                }
+            };
+
+            const currentStage = (scanData && scanData.current_stage) || (scanData && scanData.status) || "INITIALIZING";
+
+            const stages = [
+                { id: "STATIC_ANALYSIS", label: "Static Analysis", icon: "fact_check" },
+                { id: "FUZZING", label: "AFL++ Fuzzing", icon: "bug_report" },
+                { id: "TRIAGE", label: "CWE Triage", icon: "medication" },
+                { id: "LLM_REASONING", label: "LLM Reasoning", icon: "psychology" },
+                { id: "SANDBOX_VALIDATION", label: "Sandbox Proof", icon: "verified" }
+            ];
+
+            const getStageIndex = (st) => {
+                if (st === "INITIALIZING" || st === "STATIC_ANALYSIS") return 0;
+                if (st === "FUZZING") return 1;
+                if (st === "TRIAGE") return 2;
+                if (st === "LLM_REASONING" || st === "PATCH_GEN") return 3;
+                if (st === "SANDBOX_VALIDATION" || st === "REPORTING") return 4;
+                if (st === "COMPLETED") return 5;
+                return 0;
+            };
+
+            const currentStageIdx = getStageIndex(currentStage);
+
+            return (
+                <div className="flex h-screen terminal-bg">
+                    <SideNavBar />
+                    <div className="flex-1 flex flex-col">
+                        <TopAppBar title="MISSION CONTROL — SCAN RUNNER" />
+                        <main className="flex-1 overflow-y-auto p-8 ml-64 pb-20">
+                            <div className="flex items-end justify-between mb-8">
+                                <div>
+                                    <h2 className="text-3xl font-black text-on-surface flex items-center gap-3">
+                                        <span className="material-symbols-outlined text-primary-fixed text-3xl">satellite_alt</span>
+                                        Live Cyber-Reasoning Telemetry
+                                    </h2>
+                                    <p className="text-xs text-on-surface-variant mt-1 font-mono">
+                                        Target: <span className="text-primary-fixed font-bold">{scanData ? (scanData.target_name || scanData.target) : 'No Scan Selected'}</span> | 
+                                        Scan ID: <span className="text-outline">{activeScanId ? activeScanId.slice(0, 13) : 'N/A'}</span>
+                                    </p>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <div className="bg-surface-container-lowest border border-white/10 px-4 py-1.5 rounded text-xs font-mono font-bold text-primary-fixed flex items-center gap-2">
+                                        <span className={`w-2 h-2 rounded-full ${scanData && scanData.status === 'COMPLETED' ? 'bg-primary-fixed' : 'bg-yellow-400 pulse-indicator'}`}></span>
+                                        STATUS: {scanData ? scanData.status : 'WAITING'}
+                                    </div>
+                                    {scanData && scanData.status === 'RUNNING' && (
+                                        <button 
+                                            onClick={handleCancel}
+                                            disabled={isCancelling}
+                                            className="px-3 py-1.5 rounded bg-error/10 border border-error/30 text-error hover:bg-error/20 text-xs font-mono font-bold"
+                                        >
+                                            {isCancelling ? 'Cancelling...' : 'Cancel Scan'}
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Execution Pipeline Flow */}
+                            <section className="glass-panel rounded-xl p-8 mb-6 relative overflow-hidden">
+                                <div className="flex items-center justify-between px-8 relative">
+                                    <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-surface-container-highest -translate-y-1/2 z-0"></div>
+                                    {stages.map((st, idx) => {
+                                        const isDone = currentStageIdx > idx || (scanData && scanData.status === 'COMPLETED');
+                                        const isActive = currentStageIdx === idx && scanData && scanData.status === 'RUNNING';
+                                        return (
+                                            <div key={st.id} className="flex flex-col items-center gap-2.5 z-10">
+                                                <div className={`w-11 h-11 rounded-full flex items-center justify-center border-2 shadow-lg transition-all ${isDone ? 'bg-primary-fixed/20 border-primary-fixed text-primary-fixed' : isActive ? 'bg-primary-fixed border-primary-fixed text-on-primary-fixed pulse-indicator scale-110' : 'bg-surface-container-lowest border-white/10 text-on-surface-variant'}`}>
+                                                    <span className="material-symbols-outlined text-[20px]">{isDone ? 'check' : st.icon}</span>
+                                                </div>
+                                                <span className={`text-[10px] font-bold uppercase tracking-widest font-mono ${isActive ? 'text-primary-fixed' : isDone ? 'text-on-surface' : 'text-on-surface-variant'}`}>
+                                                    {st.label}
+                                                </span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </section>
+
+                            <div className="grid grid-cols-12 gap-6">
+                                {/* Event Log Stream */}
+                                <div className="col-span-8 glass-panel rounded-xl flex flex-col h-[380px]">
+                                    <div className="p-3.5 border-b border-white/5 bg-white/5 flex items-center justify-between text-xs font-bold font-mono">
+                                        <div className="flex items-center gap-2">
+                                            <span className="material-symbols-outlined text-[16px] text-primary-fixed">terminal</span> 
+                                            CRS Execution Stream
+                                        </div>
+                                        <span className="text-outline">{scanData && scanData.recent_logs ? `${scanData.recent_logs.length} events` : '0 events'}</span>
+                                    </div>
+                                    <div className="flex-1 overflow-y-auto p-4 space-y-2 font-mono text-[11px]">
+                                        {!scanData || !scanData.recent_logs || scanData.recent_logs.length === 0 ? (
+                                            <div className="text-on-surface-variant opacity-60">Waiting for backend pipeline logs...</div>
+                                        ) : (
+                                            scanData.recent_logs.map((logMsg, idx) => (
+                                                <div key={idx} className="flex gap-2 text-on-surface-variant border-b border-white/5 pb-1">
+                                                    <span className="text-primary-fixed font-bold">{logMsg}</span>
+                                                </div>
+                                            ))
+                                        )}
+                                        <div ref={logEndRef} />
+                                    </div>
+                                </div>
+
+                                {/* Live Stats Box */}
+                                <div className="col-span-4 glass-panel rounded-xl p-5 flex flex-col justify-between">
+                                    <div>
+                                        <h3 className="text-xs font-bold text-primary-fixed tracking-widest uppercase mb-4 font-mono">Current Telemetry</h3>
+                                        <div className="space-y-3 font-mono">
+                                            <div className="bg-surface-container-lowest border border-white/5 rounded p-3">
+                                                <div className="text-[9px] text-outline uppercase">Current Stage</div>
+                                                <div className="text-base font-bold text-primary-fixed truncate">{currentStage}</div>
+                                            </div>
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <div className="bg-surface-container-lowest border border-white/5 rounded p-3 text-center">
+                                                    <div className="text-[9px] text-outline uppercase">Crashes</div>
+                                                    <div className="text-2xl font-bold text-error">{scanData ? scanData.crashes_found : 0}</div>
+                                                </div>
+                                                <div className="bg-surface-container-lowest border border-white/5 rounded p-3 text-center">
+                                                    <div className="text-[9px] text-outline uppercase">Proven Fixes</div>
+                                                    <div className="text-2xl font-bold text-primary-fixed">{scanData ? scanData.proven_fixes : 0}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Action button upon completion */}
+                                    <div className="pt-4 border-t border-white/5">
+                                        {scanData && scanData.status === 'COMPLETED' ? (
+                                            <button 
+                                                onClick={() => navigate('/findings')}
+                                                className="w-full py-3 bg-primary-fixed text-on-primary-fixed font-bold rounded shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:brightness-110 transition-all flex items-center justify-center gap-2 uppercase tracking-wider text-xs font-mono"
+                                            >
+                                                <span className="material-symbols-outlined text-[18px]">security</span>
+                                                View Findings & Proof-of-Fix
+                                            </button>
+                                        ) : scanData && scanData.status === 'FAILED' ? (
+                                            <div className="text-error text-xs font-mono p-2 bg-error/10 border border-error/20 rounded">
+                                                Scan Failed: {scanData.error_message || 'Pipeline error'}
+                                            </div>
+                                        ) : (
+                                            <div className="flex items-center justify-center gap-2 text-xs text-on-surface-variant font-mono">
+                                                <span className="w-2 h-2 bg-primary-fixed rounded-full animate-ping"></span>
+                                                Processing target in sandbox...
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                        <Footer />
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Screen: Findings & Proof-of-Fix ---
+
+        const Findings = () => {
+            const { activeScanId, recentScans, navigate } = useApp();
+            const [findings, setFindings] = useState([]);
+            const [selectedFindingIdx, setSelectedFindingIdx] = useState(0);
+            const [loading, setLoading] = useState(true);
+
+            const effectiveScanId = activeScanId || (recentScans.length > 0 ? recentScans[0].scan_id : null);
+
+            useEffect(() => {
+                if (effectiveScanId) {
+                    setLoading(true);
+                    api.getScanFindings(effectiveScanId)
+                        .then((data) => {
+                            setFindings(data.findings || []);
+                            setLoading(false);
+                        })
+                        .catch(() => {
+                            setFindings([]);
+                            setLoading(false);
+                        });
+                } else {
+                    setLoading(false);
+                }
+            }, [effectiveScanId]);
+
+            const currentFinding = findings[selectedFindingIdx];
+
+            return (
+                <div className="flex h-screen terminal-bg">
+                    <SideNavBar />
+                    <div className="flex-1 flex flex-col">
+                        <TopAppBar title="VULNERABILITY FINDINGS & PROOF-OF-FIX" />
+                        <main className="flex-1 flex overflow-hidden ml-64 p-6 gap-6">
+                            {loading ? (
+                                <div className="w-full flex items-center justify-center font-mono text-primary-fixed text-xs">
+                                    <span className="material-symbols-outlined animate-spin mr-2">progress_activity</span>
+                                    Loading Verified Findings...
+                                </div>
+                            ) : findings.length === 0 ? (
+                                <div className="w-full flex flex-col items-center justify-center glass-panel rounded-xl p-12 text-center">
+                                    <div className="w-16 h-16 rounded-full bg-primary-fixed/10 border border-primary-fixed/30 flex items-center justify-center text-primary-fixed mb-4">
+                                        <span className="material-symbols-outlined text-4xl">verified_user</span>
+                                    </div>
+                                    <h2 className="text-2xl font-bold text-on-surface mb-2 font-mono">Zero Vulnerabilities Discovered</h2>
+                                    <p className="text-on-surface-variant max-w-md text-xs font-mono mb-6">
+                                        The Cyber-Reasoning System completed fuzzing and static analysis without triggering memory corruptions or sanitizer aborts on this target.
+                                    </p>
+                                    <button onClick={() => navigate('/analyze')} className="px-6 py-2.5 bg-primary-fixed text-on-primary-fixed font-bold rounded text-xs uppercase tracking-wider font-mono">
+                                        Analyze Another Target
+                                    </button>
+                                </div>
+                            ) : (
+                                <React.Fragment>
+                                    {/* Left: Findings List */}
+                                    <div className="w-1/3 flex flex-col gap-3 h-full">
+                                        <div className="flex items-center justify-between">
+                                            <h2 className="text-base font-bold text-on-surface font-mono">Detected Threats</h2>
+                                            <span className="text-[10px] font-bold text-primary-fixed bg-primary-fixed/10 px-2 py-0.5 rounded font-mono border border-primary-fixed/20">
+                                                {findings.length} Finding(s)
+                                            </span>
+                                        </div>
+
+                                        <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
+                                            {findings.map((vuln, idx) => (
+                                                <div 
+                                                    key={idx} 
+                                                    onClick={() => setSelectedFindingIdx(idx)}
+                                                    className={`glass-panel rounded-lg p-3.5 cursor-pointer relative overflow-hidden transition-all ${selectedFindingIdx === idx ? 'border-primary-fixed shadow-[0_0_12px_rgba(0,219,233,0.2)] bg-primary-fixed/5' : 'border-white/5 hover:border-white/20'}`}
+                                                >
+                                                    <div className="flex justify-between items-start mb-1.5">
+                                                        <span className={`text-[9px] font-bold px-2 py-0.5 rounded font-mono ${vuln.severity === 'CRITICAL' ? 'bg-error/10 text-error border border-error/30' : 'bg-orange-500/10 text-orange-400 border border-orange-500/30'}`}>
+                                                            {vuln.severity}
+                                                        </span>
+                                                        <span className="text-[10px] text-primary-fixed font-mono font-bold">
+                                                            {vuln.patch_status === 'validated' ? '✓ PROVEN FIX' : vuln.patch_status.toUpperCase()}
+                                                        </span>
+                                                    </div>
+                                                    <h3 className={`text-xs font-bold font-mono mb-1 ${selectedFindingIdx === idx ? 'text-primary-fixed' : 'text-on-surface'}`}>
+                                                        {vuln.cwe ? `${vuln.cwe.id}: ${vuln.cwe.name}` : 'Vulnerability'}
+                                                    </h3>
+                                                    <div className="flex items-center gap-2 text-[10px] text-outline font-mono">
+                                                        <span className="material-symbols-outlined text-[13px]">terminal</span> {vuln.target}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Right: Finding Details & Proof-of-Fix */}
+                                    <div className="w-2/3 glass-panel rounded-xl flex flex-col overflow-hidden relative border-primary-fixed/20">
+                                        {currentFinding && (
+                                            <React.Fragment>
+                                                {/* Header Bar */}
+                                                <div className="p-5 border-b border-white/10 bg-white/5 flex items-start justify-between">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="w-10 h-10 rounded-lg bg-error/10 border border-error/30 flex items-center justify-center text-error">
+                                                            <span className="material-symbols-outlined text-2xl">bug_report</span>
+                                                        </div>
+                                                        <div>
+                                                            <div className="flex items-center gap-2 mb-0.5 font-mono">
+                                                                <span className="text-[10px] font-bold text-error bg-error/10 px-2 py-0.5 rounded">
+                                                                    SEVERITY: {currentFinding.severity}
+                                                                </span>
+                                                                <span className="text-[10px] text-primary-fixed px-2 border border-primary-fixed/30 rounded">
+                                                                    CONFIDENCE: {Math.round(currentFinding.confidence * 100)}%
+                                                                </span>
+                                                            </div>
+                                                            <h2 className="text-base font-bold text-on-surface font-mono">
+                                                                {currentFinding.cwe ? `${currentFinding.cwe.id} — ${currentFinding.cwe.name}` : 'Unknown'}
+                                                            </h2>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Report Actions */}
+                                                    <div className="flex gap-2 font-mono">
+                                                        <a 
+                                                            href={api.getReportHtmlUrl(effectiveScanId)} 
+                                                            target="_blank" 
+                                                            rel="noreferrer"
+                                                            className="px-3 py-1.5 bg-primary-fixed text-on-primary-fixed rounded font-bold text-[11px] flex items-center gap-1 uppercase tracking-wider hover:brightness-110 transition-all shadow-[0_0_10px_rgba(0,219,233,0.25)]"
+                                                        >
+                                                            <span className="material-symbols-outlined text-[15px]">visibility</span>
+                                                            View HTML Report
+                                                        </a>
+                                                        <a 
+                                                            href={api.getReportMarkdownUrl(effectiveScanId)} 
+                                                            download
+                                                            className="px-2.5 py-1.5 border border-white/10 text-on-surface-variant hover:text-on-surface rounded text-[11px] flex items-center gap-1"
+                                                        >
+                                                            <span className="material-symbols-outlined text-[13px]">download</span> MD
+                                                        </a>
+                                                        <a 
+                                                            href={api.getReportJsonUrl(effectiveScanId)} 
+                                                            download
+                                                            className="px-2.5 py-1.5 border border-white/10 text-on-surface-variant hover:text-on-surface rounded text-[11px] flex items-center gap-1"
+                                                        >
+                                                            <span className="material-symbols-outlined text-[13px]">download</span> JSON
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                {/* Details Content */}
+                                                <div className="flex-1 overflow-y-auto p-5 space-y-6">
+                                                    {/* AI Root Cause Analysis */}
+                                                    <section>
+                                                        <div className="flex items-center gap-2 mb-2 font-mono">
+                                                            <span className="material-symbols-outlined text-secondary text-[18px]">psychology</span>
+                                                            <h3 className="text-xs font-bold uppercase tracking-wider">AI Root Cause Reasoning</h3>
+                                                        </div>
+                                                        <div className="bg-white/5 border border-white/10 rounded-lg p-3.5 relative overflow-hidden">
+                                                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-fixed"></div>
+                                                            <p className="text-on-surface-variant leading-relaxed text-xs font-mono">
+                                                                {currentFinding.root_cause ? currentFinding.root_cause.explanation : currentFinding.description || 'Root cause explanation generated by Gemini CRS.'}
+                                                            </p>
+                                                        </div>
+                                                    </section>
+
+                                                    {/* AI Patch Diff */}
+                                                    {currentFinding.patch && (
+                                                        <section>
+                                                            <div className="flex items-center justify-between mb-2 font-mono">
+                                                                <div className="flex items-center gap-2">
+                                                                    <span className="material-symbols-outlined text-primary-fixed text-[18px]">difference</span>
+                                                                    <h3 className="text-xs font-bold uppercase tracking-wider">Synthesized Minimal Diff Patch</h3>
+                                                                </div>
+                                                                <span className="text-[11px] text-outline">
+                                                                    Target: {currentFinding.patch.target_file || 'vuln.c'} (Attempt #{currentFinding.patch.attempt_number})
+                                                                </span>
+                                                            </div>
+                                                            <div className="bg-[#080c0e] rounded-lg border border-primary-fixed/30 overflow-hidden font-mono text-xs">
+                                                                <div className="bg-primary-fixed/10 px-3.5 py-1.5 text-[10px] font-bold text-primary-fixed border-b border-primary-fixed/20 flex justify-between">
+                                                                    <span>UNIFIED DIFF</span>
+                                                                    <span>CONFIDENCE: {currentFinding.patch.confidence}/10</span>
+                                                                </div>
+                                                                <pre className="p-3.5 text-on-surface-variant overflow-x-auto whitespace-pre-wrap font-mono text-[11px]">
+                                                                    <code>{currentFinding.patch.diff}</code>
+                                                                </pre>
+                                                            </div>
+                                                        </section>
+                                                    )}
+
+                                                    {/* 5-Step Sandbox Validation Results */}
+                                                    {currentFinding.validation && (
+                                                        <section>
+                                                            <div className="flex items-center gap-2 mb-2 font-mono">
+                                                                <span className="material-symbols-outlined text-primary-fixed text-[18px]">task_alt</span>
+                                                                <h3 className="text-xs font-bold uppercase tracking-wider">Sandboxed Proof-of-Fix Results</h3>
+                                                            </div>
+                                                            <div className="grid grid-cols-3 gap-3 font-mono text-xs">
+                                                                {currentFinding.validation.steps && currentFinding.validation.steps.map((st, sidx) => (
+                                                                    <div key={sidx} className={`p-3 rounded border ${st.passed ? 'bg-primary-fixed/5 border-primary-fixed/30 text-primary-fixed' : 'bg-error/5 border-error/30 text-error'}`}>
+                                                                        <div className="flex items-center gap-1 font-bold uppercase mb-1 text-[11px]">
+                                                                            <span className="material-symbols-outlined text-sm">{st.passed ? 'check_circle' : 'cancel'}</span>
+                                                                            {st.step_name.replace(/_/g, ' ')}
+                                                                        </div>
+                                                                        <div className="text-[10px] text-on-surface-variant truncate">{st.notes || (st.passed ? 'Passed check' : 'Failed check')}</div>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </section>
+                                                    )}
+                                                </div>
+                                            </React.Fragment>
+                                        )}
+                                    </div>
+                                </React.Fragment>
+                            )}
+                        </main>
+                        <Footer />
+                    </div>
+                </div>
+            );
+        };
+
+        // --- Root Application Mount ---
+
+        const App = () => {
+            const { currentRoute } = useApp();
+
+            const renderRoute = () => {
+                switch (currentRoute) {
+                    case '/':
+                        return <LandingPage />;
+                    case '/dashboard':
+                        return <Dashboard />;
+                    case '/analyze':
+                        return <AnalyzeSetup />;
+                    case '/mission-control':
+                        return <LiveAnalysis />;
+                    case '/findings':
+                        return <Findings />;
+                    default:
+                        return <LandingPage />;
+                }
+            };
+
+            return (
+                <div className="h-screen w-screen overflow-hidden">
+                    {renderRoute()}
+                </div>
+            );
+        };
+
+        // Initialize Root
+        const container = document.getElementById('root');
+        const root = createRoot(container);
+        root.render(
+            <AppProvider>
+                <App />
+            </AppProvider>
+        );
+    </script>
+</body>
+</html>
