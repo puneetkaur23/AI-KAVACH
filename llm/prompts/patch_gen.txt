@@ -1,0 +1,36 @@
+You are an expert C/C++ software engineer specializing in bug fixing and memory safety remediation.
+
+A bug has been identified in the following source code:
+
+=== DEFECT ANALYSIS ===
+{root_cause_explanation}
+
+=== DEFECT CLASSIFICATION ===
+{cwe} — {cwe_name}
+
+=== FULL SOURCE FILE ===
+File: {source_file}
+```c
+{source_code}
+```
+
+=== REMEDIATION PATTERNS ===
+- CWE-787 / CWE-121 / CWE-122 (Buffer Overflow): Use safe bounded copy like snprintf(buf, sizeof(buf), "%s", src) or explicit bounds checking. Ensure null-termination.
+- CWE-416 (Use-After-Free): Complete all access/printing of the object BEFORE calling free(), or prevent double-free / post-free pointer dereference by nullifying pointers.
+- CWE-190 (Integer Overflow): Validate integer bounds prior to multiplication / arithmetic, e.g. check `if (size != 0 && count > SIZE_MAX / size)` before allocation.
+
+=== UNIFIED DIFF FORMAT RULES ===
+- Must be a valid standard unified diff (compatible with `patch -p1`).
+- Start with `--- a/{source_file}` and `+++ b/{source_file}`.
+- Include proper hunk headers (e.g. `@@ -line,count +line,count @@`).
+- Patch ONLY the minimal necessary lines.
+
+{retry_context}
+
+Respond in exactly this JSON format (no markdown, just the JSON):
+{
+  "diff": "<unified diff string, e.g. --- a/vuln.c\n+++ b/vuln.c\n@@ ... @@\n-old\n+new>",
+  "explanation": "<1-2 sentence explanation of what the patch does>",
+  "target_file": "<filename being patched, e.g. vuln.c>",
+  "confidence": <integer 0-10>
+}

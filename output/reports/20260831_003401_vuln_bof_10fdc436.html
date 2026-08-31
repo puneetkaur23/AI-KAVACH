@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Kavach — Finding Report: vuln_bof</title>
+<style>
+  body { font-family: 'Segoe UI', system-ui, sans-serif; max-width: 960px; margin: 40px auto; padding: 0 24px; color: #1a1a2e; background: #f8fafc; }
+  h1 { color: #0f172a; border-bottom: 3px solid #3b82f6; padding-bottom: 12px; }
+  h2 { color: #1e40af; margin-top: 2rem; }
+  h3 { color: #374151; }
+  .status-badge { display: inline-block; background: #ef4444; color: white; padding: 6px 18px; border-radius: 20px; font-weight: bold; font-size: 1.1rem; margin: 12px 0; }
+  pre { background: #0f172a; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 0.875rem; line-height: 1.5; }
+  pre.diff { background: #0d1117; }
+  pre.diff .add { color: #22c55e; }
+  pre.diff .del { color: #ef4444; }
+  code { background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 0.875rem; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  td, th { border: 1px solid #e2e8f0; padding: 8px 12px; text-align: left; }
+  th { background: #1e40af; color: white; }
+  tr:nth-child(even) { background: #f1f5f9; }
+  hr { border: none; border-top: 2px solid #e2e8f0; margin: 2rem 0; }
+  .metric-box { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin: 8px 0; }
+  .header-banner { background: linear-gradient(135deg, #1e40af 0%, #0f172a 100%); color: white; padding: 24px; border-radius: 12px; margin-bottom: 2rem; }
+  .header-banner h1 { color: white; border-bottom: 2px solid rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+<div class="header-banner">
+  <h1>🛡️ AI Kavach — Cyber-Reasoning System</h1>
+  <div class="status-badge">COULD NOT PATCH</div>
+  <p>Target: <strong>vuln_bof</strong> &nbsp;|&nbsp;
+     CWE: <strong>UNKNOWN</strong> — Unknown Vulnerability &nbsp;|&nbsp;
+     Severity: <strong>LOW</strong></p>
+</div>
+<p><h1>AI Kavach — Security Finding Report</h1></p><p><strong>Status:</strong> ❌ COULD NOT PATCH  
+<strong>Generated:</strong> 2026-08-31T00:34:01.419024  
+<strong>Target:</strong> <code>vuln_bof</code>  
+<strong>CWE:</strong> UNKNOWN — Unknown Vulnerability  
+<strong>Severity:</strong> LOW  </p><p><hr></p><p><h2>1. Vulnerability Summary</h2></p><p>*Root cause analysis was not completed.*</p><p><hr></p><p><h2>2. Crash Evidence</h2></p><p><h3>Crash Input (hex)</h3>
+``<code>
+a2a21a1a1a1a1e1a1a1a1a211a1a1a1a1a1a1a1a1a1a1a1aa2a27fa25d82a2a2a2a2a2a2a2a2a2a2a2a2a21aa2a2a2a2a2a2a2a2a2a287a2a2a2a201a2a24179
+</code>`<code></p><p><h3>ASan / UBSan Output (unpatched build)</h3>
+</code>`<code>
+<strong>* buffer overflow detected </strong>*: terminated</p><p></code>`<code></p><p><h3>Code Slice at Crash Site</h3>
+</code>`<code>c
+[Could not extract code slice — ASan output format unrecognized]
+</code>`<code></p><p><hr></p><p><h2>3. Generated Patch</h2></p><p>*No patch was generated.*</p><p><hr></p><p><h2>4. Validation Results</h2></p><p>*Validation was not run.*</p><p><hr></p><p><h2>5. Pipeline Metrics</h2></p><p><tr><td>Metric | Value</td></tr>
+|---|---|
+<tr><td>Pipeline Status | ERROR</td></tr>
+<tr><td>Wall-Clock Time | 52.0s</td></tr>
+<tr><td>Total LLM Calls | 1</td></tr>
+<tr><td>Patch Retry Count | 0</td></tr>
+<tr><td>Peak Memory | 0 MB</td></tr>
+<tr><td>root_cause_secs | 51.97s</td></tr></p><p><hr></p><p><h2>⚠️ Error / Could Not Patch</h2></p><p></code>`<code>
+Root cause analysis failed — LLM did not return valid JSON
+</code>``</p>
+</body>
+</html>

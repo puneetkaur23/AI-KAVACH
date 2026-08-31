@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Kavach — Cyber-Reasoning System Report: {{ report.crash.target_name }}</title>
+<style>
+  :root {
+    --bg: #0b0f19;
+    --card-bg: #111827;
+    --border: #1f2937;
+    --accent: #3b82f6;
+    --success: #10b981;
+    --fail: #ef4444;
+    --text: #f3f4f6;
+    --text-muted: #9ca3af;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 30px 20px;
+  }
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  }
+  .header h1 {
+    margin: 0 0 10px 0;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .badge-pass { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
+  .badge-fail { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+  .badge-cwe { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid #3b82f6; }
+  .badge-crit { background: rgba(220, 38, 38, 0.3); color: #fca5a5; border: 1px solid #dc2626; }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .card h3 {
+    margin: 0 0 8px 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .card .val {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #fff;
+  }
+  .section {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .section h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    color: #93c5fd;
+  }
+  pre {
+    background: #030712;
+    border: 1px solid #1f2937;
+    border-radius: 6px;
+    padding: 14px;
+    overflow-x: auto;
+    font-family: "JetBrains Mono", Consolas, Menlo, monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .diff-add { color: #34d399; }
+  .diff-del { color: #f87171; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  th { color: var(--text-muted); }
+  .success-text { color: #34d399; font-weight: 600; }
+  .fail-text { color: #f87171; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🛡️ AI Kavach — Cyber-Reasoning System</h1>
+    <div>
+      {% if report.is_proven_fix() %}
+        <span class="badge badge-pass">✅ PROVEN FIX</span>
+      {% else %}
+        <span class="badge badge-fail">❌ COULD NOT PATCH</span>
+      {% endif %}
+      <span class="badge badge-cwe">{{ report.crash.cwe }}: {{ report.crash.cwe_name }}</span>
+      <span class="badge badge-crit">{{ report.crash.severity.value }} SEVERITY</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Target Component</h3>
+      <div class="val">{{ report.crash.target_name }}</div>
+    </div>
+    <div class="card">
+      <h3>Wall-Clock Time</h3>
+      <div class="val">{{ "%.1f"|format(report.wall_clock_seconds) }}s</div>
+    </div>
+    <div class="card">
+      <h3>LLM Calls / Retries</h3>
+      <div class="val">{{ report.total_llm_calls }} / {{ report.retry_count }}</div>
+    </div>
+    <div class="card">
+      <h3>Peak Memory</h3>
+      <div class="val">{{ "%.0f"|format(report.peak_memory_mb) }} MB</div>
+    </div>
+  </div>
+
+  {% if report.root_cause %}
+  <div class="section">
+    <h2>1. Root Cause Analysis (LLM Autonomous Triage)</h2>
+    <p><strong>Explanation:</strong> {{ report.root_cause.explanation }}</p>
+    <p><strong>Classification:</strong> <code>{{ report.root_cause.cwe_confirmed }}</code>: {{ report.root_cause.cwe_name or report.crash.cwe_name }} (Confidence: {{ report.root_cause.confidence }}/10)</p>
+    {% if report.crash.exploitability_note %}
+    <p><strong>Exploitability Assessment:</strong> {{ report.crash.exploitability_note }}</p>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <div class="section">
+    <h2>2. Crash Evidence & Sanitizer Logs</h2>
+    <p><strong>Crash Input (hex dump):</strong></p>
+    <pre><code>{{ report.crash.crash_input_hex }}</code></pre>
+    <p><strong>Sanitizer / Runtime Error Output:</strong></p>
+    <pre><code>{{ report.crash.asan_output }}</code></pre>
+    {% if report.crash.code_slice %}
+    <p><strong>Code Context at Crash Site:</strong></p>
+    <pre><code class="language-c">{{ report.crash.code_slice }}</code></pre>
+    {% endif %}
+  </div>
+
+  {% if report.patch %}
+  <div class="section">
+    <h2>3. Generated Autonomous Patch (Attempt {{ report.patch.attempt_number }})</h2>
+    <p><strong>Target File:</strong> <code>{{ report.patch.target_file }}</code> &nbsp;|&nbsp; <strong>Patch Confidence:</strong> {{ report.patch.confidence }}/10</p>
+    <p><strong>Summary of Fix:</strong> {{ report.patch.explanation }}</p>
+    <pre><code>{{ report.patch.diff }}</code></pre>
+  </div>
+  {% endif %}
+
+  {% if report.validation %}
+  <div class="section">
+    <h2>4. Sandboxed Multi-Stage Proof-of-Fix Validation</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Validation Phase</th>
+          <th>Outcome</th>
+          <th>Verification Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1. Pre-Patch Crash Reproduction</td>
+          <td>{% if report.validation.pre_patch_crash.passed %}<span class="success-text">PASS (Bug Verified)</span>{% else %}<span class="fail-text">FAIL</span>{% endif %}</td>
+          <td>{{ report.validation.pre_patch_crash.notes }}</td>
+        </tr>
+        <tr>
+          <td>2. Post-Patch Exploit Replay</td>
+          <td>{% if report.validation.post_patch_crash.passed %}<span class="success-text">PASS (Crash Eliminated)</span>{% else %}<span class="fail-text">FAIL (Still Crashes)</span>{% endif %}</td>
+          <td>{{ report.validation.post_patch_crash.notes }}</td>
+        </tr>
+        <tr>
+          <td>3. Regression Suite Verification</td>
+          <td>{% if report.validation.regression.passed %}<span class="success-text">PASS (Zero Regressions)</span>{% else %}<span class="fail-text">FAIL</span>{% endif %}</td>
+          <td>{{ report.validation.regression.notes }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+  <div class="section">
+    <h2>5. Execution & Pipeline Telemetry</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Stage</th>
+          <th>Duration (seconds)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for stage, sec in report.stage_timings.items() %}
+        <tr>
+          <td><code>{{ stage }}</code></td>
+          <td>{{ "%.2f"|format(sec) }}s</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

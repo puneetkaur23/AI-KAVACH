@@ -1,0 +1,23 @@
+# AI Kavach CRS — Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# LLM SDKs (install the one(s) you use)
+google-generativeai>=0.8.0      # For --llm google (Gemini API)
+# openai>=1.0.0                 # Uncomment for --llm openai
+# requests>=2.31.0              # Needed for --llm ollama
+
+# Templating (for HTML reports)
+jinja2>=3.1.0
+
+# Utilities
+python-dotenv>=1.0.0            # Load .env file
+psutil>=5.9.0                   # CPU/memory monitoring
+
+# REST API Backend
+fastapi>=0.100.0                # FastAPI framework
+uvicorn[standard]>=0.22.0       # ASGI server
+pydantic>=2.0.0                 # Request/response validation
+
+# Optional: for running Semgrep from Python
+# semgrep is a CLI tool, install separately:
+# pip install semgrep

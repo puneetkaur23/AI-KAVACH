@@ -1,0 +1,82 @@
+rules:
+  - id: kavach-strcpy-bof
+    patterns:
+      - pattern: strcpy($DST, $SRC)
+    message: |
+      Unsafe strcpy() with no bounds check. If $SRC is larger than $DST's buffer,
+      this is a stack/heap buffer overflow (CWE-787/CWE-121/CWE-122).
+      Use strncpy() or strlcpy() with explicit size.
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: CWE-787
+      cwe-id: CWE-787
+      confidence: HIGH
+
+  - id: kavach-gets-bof
+    patterns:
+      - pattern: gets($BUFFER)
+    message: |
+      gets() has no bounds checking and is inherently unsafe (CWE-787).
+      Use fgets() with explicit size instead.
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: CWE-787
+      confidence: HIGH
+
+  - id: kavach-sprintf-bof
+    patterns:
+      - pattern: sprintf($DST, $FMT, ...)
+    message: |
+      sprintf() has no bounds checking. If formatted output exceeds buffer size,
+      this is a buffer overflow (CWE-787). Use snprintf() instead.
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: CWE-787
+      confidence: MEDIUM
+
+  - id: kavach-free-use-after-free
+    patterns:
+      - pattern: |
+          free($PTR);
+          ...
+          $PTR->$FIELD
+      - pattern: |
+          free($PTR);
+          ...
+          *$PTR
+    message: |
+      Pointer $PTR is accessed after being passed to free() (CWE-416 Use-After-Free).
+      Set the pointer to NULL after free().
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: CWE-416
+      confidence: HIGH
+
+  - id: kavach-int-overflow-alloc
+    patterns:
+      - pattern: malloc($A * $B)
+      - pattern: calloc($A, $B)
+    message: |
+      Multiplication in allocation size may overflow (CWE-190).
+      Use a safe multiplication check before allocating.
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: CWE-190
+      confidence: MEDIUM
+
+  - id: kavach-strcat-bof
+    patterns:
+      - pattern: strcat($DST, $SRC)
+    message: |
+      strcat() appends without bounds checking (CWE-787).
+      Use strncat() with explicit size instead.
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: CWE-787
+      confidence: MEDIUM

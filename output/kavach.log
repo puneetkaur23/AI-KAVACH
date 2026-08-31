@@ -1,0 +1,667 @@
+2026-08-30 22:56:30,482 [ERROR] llm.llm_client � [llm] google-generativeai not installed. Run: pip install google-generativeai
+2026-08-30 22:56:30,482 [INFO] kavach.runner � [kavach] LLM provider: google
+2026-08-30 22:56:30,483 [INFO] kavach.runner � 
+2026-08-30 22:56:30,529 [INFO] kavach.runner �   AI KAVACH � Processing target: vuln_bof
+2026-08-30 22:56:30,531 [INFO] kavach.runner � [kavach] Phase 1/4: Static Analysis
+2026-08-30 22:56:30,543 [INFO] static_analysis.run_semgrep � [semgrep] Running: semgrep --config C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\rules --json --no-git-ignore C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\targets\vuln_bof
+2026-08-30 22:56:30,547 [WARNING] static_analysis.run_semgrep � [semgrep] Semgrep not found. Skipping static analysis.
+2026-08-30 22:56:30,548 [INFO] kavach.runner � [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-30 22:56:30,549 [INFO] kavach.runner � [kavach] Phase 2/4: Fuzzing (timeout=60s)
+2026-08-30 22:56:30,569 [INFO] fuzzing.fuzzer_manager � [fuzzer] Starting fuzz run on vuln_bof (timeout=60s)
+2026-08-30 22:56:30,569 [INFO] fuzzing.fuzzer_manager � [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-30 22:56:30,648 [ERROR] kavach.runner � [kavach] Fuzzing failed: Docker exec failed (rc=1):
+STDOUT: 
+STDERR: Error response from daemon: container a060c4f5566e6907c2907aa290cf7d5ddc75edefd96d908c78572ba10de7b224 is not running
+
+2026-08-30 22:56:30,648 [INFO] kavach.runner � [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-30 22:56:30,648 [INFO] kavach.main � No findings for target 'targets/vuln_bof'
+2026-08-30 23:22:55,094 [ERROR] llm.llm_client � [llm] google-generativeai not installed. Run: pip install google-generativeai
+2026-08-30 23:22:55,094 [INFO] kavach.runner � [kavach] LLM provider: google
+2026-08-30 23:22:55,095 [INFO] kavach.runner � 
+2026-08-30 23:22:55,096 [INFO] kavach.runner �   AI KAVACH � Processing target: vuln_bof
+2026-08-30 23:22:55,097 [INFO] kavach.runner � [kavach] Phase 1/4: Static Analysis
+2026-08-30 23:22:55,097 [INFO] static_analysis.run_semgrep � [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-30 23:22:55,097 [INFO] kavach.runner � [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-30 23:22:55,097 [INFO] kavach.runner � [kavach] Phase 2/4: Fuzzing (timeout=60s)
+2026-08-30 23:22:55,099 [INFO] fuzzing.fuzzer_manager � [fuzzer] Starting fuzz run on vuln_bof (timeout=60s)
+2026-08-30 23:22:55,099 [INFO] fuzzing.fuzzer_manager � [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-30 23:22:55,161 [ERROR] kavach.runner � [kavach] Fuzzing failed: Docker exec failed (rc=1):
+STDOUT: 
+STDERR: Error response from daemon: container a060c4f5566e6907c2907aa290cf7d5ddc75edefd96d908c78572ba10de7b224 is not running
+
+2026-08-30 23:22:55,161 [INFO] kavach.runner � [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-30 23:22:55,161 [INFO] kavach.main � No findings for target 'targets/vuln_bof'
+2026-08-30 23:27:17,033 [ERROR] llm.llm_client � [llm] google-generativeai not installed. Run: pip install google-generativeai
+2026-08-30 23:27:17,033 [INFO] kavach.runner � [kavach] LLM provider: google
+2026-08-30 23:27:17,034 [INFO] kavach.runner � 
+2026-08-30 23:27:17,036 [INFO] kavach.runner �   AI KAVACH � Processing target: vuln_bof
+2026-08-30 23:27:17,036 [INFO] kavach.runner � [kavach] Phase 1/4: Static Analysis
+2026-08-30 23:27:17,037 [INFO] static_analysis.run_semgrep � [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-30 23:27:17,037 [INFO] kavach.runner � [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-30 23:27:17,037 [INFO] kavach.runner � [kavach] Phase 2/4: Fuzzing (timeout=60s)
+2026-08-30 23:27:17,038 [INFO] fuzzing.fuzzer_manager � [fuzzer] Starting fuzz run on vuln_bof (timeout=60s)
+2026-08-30 23:27:17,039 [INFO] fuzzing.fuzzer_manager � [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-30 23:27:17,636 [INFO] fuzzing.fuzzer_manager � [fuzzer] Fuzz run finished in 0.6s (exit=2)
+2026-08-30 23:27:17,875 [INFO] fuzzing.fuzzer_manager � [fuzzer] Collected 0 unique crash input(s)
+2026-08-30 23:27:17,875 [INFO] kavach.runner � [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-30 23:27:17,875 [INFO] kavach.main � No findings for target 'targets/vuln_bof'
+2026-08-30 23:32:45,981 [ERROR] llm.llm_client � [llm] google-generativeai not installed. Run: pip install google-generativeai
+2026-08-30 23:32:45,981 [INFO] kavach.runner � [kavach] LLM provider: google
+2026-08-30 23:32:45,981 [INFO] kavach.runner � 
+2026-08-30 23:32:45,983 [INFO] kavach.runner �   AI KAVACH � Processing target: vuln_bof
+2026-08-30 23:32:45,984 [INFO] kavach.runner � [kavach] Phase 1/4: Static Analysis
+2026-08-30 23:32:45,985 [INFO] static_analysis.run_semgrep � [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-30 23:32:45,985 [INFO] kavach.runner � [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-30 23:32:45,985 [INFO] kavach.runner � [kavach] Phase 2/4: Fuzzing (timeout=60s)
+2026-08-30 23:32:45,987 [INFO] fuzzing.fuzzer_manager � [fuzzer] Starting fuzz run on vuln_bof (timeout=60s)
+2026-08-30 23:32:45,989 [INFO] fuzzing.fuzzer_manager � [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-30 23:32:46,478 [INFO] fuzzing.fuzzer_manager � [fuzzer] Fuzz run finished in 0.5s (exit=2)
+2026-08-30 23:32:46,722 [INFO] fuzzing.fuzzer_manager � [fuzzer] Collected 0 unique crash input(s)
+2026-08-30 23:32:46,723 [INFO] kavach.runner � [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-30 23:32:46,723 [INFO] kavach.main � No findings for target 'targets/vuln_bof'
+2026-08-30 23:41:45,647 [WARNING] llm.llm_client — [llm] GOOGLE_API_KEY not set — LLM calls will fail
+2026-08-30 23:41:45,648 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-30 23:41:45,648 [INFO] kavach.runner — 
+2026-08-30 23:41:45,648 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-30 23:41:45,648 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-30 23:41:45,648 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-30 23:41:45,648 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-30 23:41:45,649 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-30 23:41:45,650 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-30 23:41:45,650 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=60s)
+2026-08-30 23:41:45,651 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=60s)
+2026-08-30 23:41:45,651 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-30 23:41:46,104 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 0.5s (exit=2)
+2026-08-30 23:41:46,415 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 0 unique crash input(s)
+2026-08-30 23:41:46,415 [INFO] kavach.runner — [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-30 23:41:46,415 [INFO] kavach.main — No findings for target 'targets/vuln_bof'
+2026-08-30 23:45:34,640 [WARNING] llm.llm_client — [llm] GOOGLE_API_KEY not set — LLM calls will fail
+2026-08-30 23:45:34,640 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-30 23:45:34,641 [INFO] kavach.runner — 
+2026-08-30 23:45:34,641 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-30 23:45:34,641 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-30 23:45:34,641 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-30 23:45:34,641 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-30 23:45:34,642 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-30 23:45:34,642 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-30 23:45:34,642 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=60s)
+2026-08-30 23:45:34,644 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=60s)
+2026-08-30 23:45:34,644 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-30 23:45:34,994 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 0.3s (exit=2)
+2026-08-30 23:45:35,252 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 0 unique crash input(s)
+2026-08-30 23:45:35,252 [INFO] kavach.runner — [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-30 23:45:35,252 [INFO] kavach.main — No findings for target 'targets/vuln_bof'
+2026-08-30 23:47:17,199 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-30 23:47:17,201 [INFO] kavach.runner — 
+2026-08-30 23:47:17,201 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-30 23:47:17,201 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-30 23:47:17,201 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-30 23:47:17,201 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-30 23:47:17,202 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-30 23:47:17,202 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-30 23:47:17,202 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=60s)
+2026-08-30 23:47:17,204 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=60s)
+2026-08-30 23:47:17,204 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-30 23:47:17,600 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 0.4s (exit=2)
+2026-08-30 23:47:18,139 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 0 unique crash input(s)
+2026-08-30 23:47:18,139 [INFO] kavach.runner — [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-30 23:47:18,140 [INFO] kavach.main — No findings for target 'targets/vuln_bof'
+2026-08-30 23:51:32,761 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-30 23:51:32,762 [INFO] kavach.runner — 
+2026-08-30 23:51:32,762 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-30 23:51:32,762 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-30 23:51:32,762 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-30 23:51:32,762 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-30 23:51:32,763 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-30 23:51:32,763 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-30 23:51:32,763 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=60s)
+2026-08-30 23:51:32,765 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=60s)
+2026-08-30 23:51:32,765 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-30 23:51:33,099 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 0.3s (exit=2)
+2026-08-30 23:51:33,351 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 0 unique crash input(s)
+2026-08-30 23:51:33,352 [INFO] kavach.runner — [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-30 23:51:33,352 [INFO] kavach.main — No findings for target 'targets/vuln_bof'
+2026-08-31 00:00:46,814 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:00:46,815 [INFO] kavach.runner — 
+2026-08-31 00:00:46,815 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:00:46,815 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:00:46,815 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:00:46,815 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:00:46,816 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 00:00:46,816 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:00:46,816 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=10s)
+2026-08-31 00:00:46,818 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=10s)
+2026-08-31 00:00:46,818 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:00:57,164 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 10.3s (exit=2)
+2026-08-31 00:00:57,465 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 0 unique crash input(s)
+2026-08-31 00:00:57,466 [INFO] kavach.runner — [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-31 00:00:57,466 [INFO] kavach.main — No findings for target 'targets/vuln_bof'
+2026-08-31 00:03:36,559 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:03:36,561 [INFO] kavach.runner — 
+2026-08-31 00:03:36,561 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:03:36,561 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:03:36,561 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:03:36,562 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:03:36,562 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 00:03:36,562 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:03:36,562 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:03:36,564 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:03:36,564 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:04:06,892 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.3s (exit=0)
+2026-08-31 00:04:07,889 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 00:04:07,889 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 00:04:07,889 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 00:04:07,890 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | UNKNOWN | Severity.LOW
+2026-08-31 00:04:07,890 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 00:04:07,890 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | UNKNOWN | LOW
+2026-08-31 00:04:07,890 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:04:07,890 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | UNKNOWN
+2026-08-31 00:04:07,890 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:08:56,514 [WARNING] llm.llm_client — [llm] GOOGLE_API_KEY not set — LLM calls will fail
+2026-08-31 00:08:56,515 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:08:56,515 [INFO] kavach.runner — 
+2026-08-31 00:08:56,515 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:08:56,515 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:08:56,515 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:08:56,515 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:08:56,516 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 00:08:56,516 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:08:56,516 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:08:56,518 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:08:56,518 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:09:27,016 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.5s (exit=0)
+2026-08-31 00:09:27,671 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 00:09:27,671 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 00:09:27,671 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 00:09:27,672 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | UNKNOWN | Severity.LOW
+2026-08-31 00:09:27,672 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 00:09:27,672 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | UNKNOWN | LOW
+2026-08-31 00:09:27,672 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:09:27,672 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | UNKNOWN
+2026-08-31 00:09:27,672 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:09:27,674 [INFO] llm.orchestrator — [orchestrator] Calling LLM for root cause analysis...
+2026-08-31 00:09:27,674 [INFO] llm.llm_client — [llm] Call #1 | mode=reasoning | provider=google
+2026-08-31 00:09:30,750 [ERROR] llm.llm_client — [llm] Call failed: 
+  No API_KEY or ADC found. Please either:
+    - Set the `GOOGLE_API_KEY` environment variable.
+    - Manually pass the key with `genai.configure(api_key=my_api_key)`.
+    - Or set up Application Default Credentials, see https://ai.google.dev/gemini-api/docs/oauth for more information.
+2026-08-31 00:10:14,325 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:10:14,325 [INFO] kavach.runner — 
+2026-08-31 00:10:14,325 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:10:14,325 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:10:14,325 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:10:14,325 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:10:14,326 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 00:10:14,326 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:10:14,326 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:10:14,328 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:10:14,328 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:10:44,621 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.3s (exit=0)
+2026-08-31 00:10:45,796 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 00:10:45,796 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 00:10:45,796 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 00:10:45,797 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | UNKNOWN | Severity.LOW
+2026-08-31 00:10:45,797 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 00:10:45,797 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | UNKNOWN | LOW
+2026-08-31 00:10:45,797 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:10:45,797 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | UNKNOWN
+2026-08-31 00:10:45,797 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:10:45,798 [INFO] llm.orchestrator — [orchestrator] Calling LLM for root cause analysis...
+2026-08-31 00:10:45,798 [INFO] llm.llm_client — [llm] Call #1 | mode=reasoning | provider=google
+2026-08-31 00:10:46,704 [ERROR] llm.llm_client — [llm] Call failed: 404 This model models/gemini-2.5-pro is no longer available to new users. Please update your code to use models/gemini-3.1-pro-preview for the latest features and improvements. We recommend you to use the Interactions API.
+2026-08-31 00:12:35,452 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:12:35,452 [INFO] kavach.runner — 
+2026-08-31 00:12:35,453 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:12:35,453 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:12:35,453 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:12:35,453 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:12:35,453 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 00:12:35,453 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:12:35,453 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:12:35,454 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:12:35,455 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:13:05,712 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.3s (exit=0)
+2026-08-31 00:13:06,901 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 00:13:06,901 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 00:13:06,901 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 00:13:06,901 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | UNKNOWN | Severity.LOW
+2026-08-31 00:13:06,901 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 00:13:06,901 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | UNKNOWN | LOW
+2026-08-31 00:13:06,901 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:13:06,901 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | UNKNOWN
+2026-08-31 00:13:06,901 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:13:06,902 [INFO] llm.orchestrator — [orchestrator] Calling LLM for root cause analysis...
+2026-08-31 00:13:06,902 [INFO] llm.llm_client — [llm] Call #1 | mode=reasoning | provider=google
+2026-08-31 00:13:36,303 [INFO] llm.llm_client — [llm] Response received in 29.40s (len=528)
+2026-08-31 00:13:36,304 [INFO] llm.orchestrator — [orchestrator] Patch attempt 1 / 4
+2026-08-31 00:13:36,305 [INFO] llm.orchestrator — [orchestrator] Calling LLM for patch generation (attempt 1)...
+2026-08-31 00:13:36,306 [INFO] llm.llm_client — [llm] Call #2 | mode=reasoning | provider=google
+2026-08-31 00:14:06,744 [INFO] llm.llm_client — [llm] Response received in 30.44s (len=467)
+2026-08-31 00:14:06,745 [INFO] sandbox.validator — [validator] Starting validation for vuln_bof (attempt 1)
+2026-08-31 00:14:06,745 [INFO] sandbox.validator — [validator] Step 1: Pre-patch crash reproduction
+2026-08-31 00:14:08,060 [INFO] sandbox.validator — [validator] ✓ Crash reproduced on unpatched build (good — it's a real bug)
+2026-08-31 00:14:08,060 [INFO] sandbox.validator — [validator] Step 2: Applying patch
+2026-08-31 00:14:08,268 [INFO] sandbox.validator — [validator] ✓ Patch applied successfully
+2026-08-31 00:14:08,269 [INFO] sandbox.validator — [validator] Step 3: Rebuilding with patch
+2026-08-31 00:14:08,505 [INFO] sandbox.validator — [validator] Step 4: Post-patch crash replay
+2026-08-31 00:14:36,484 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:14:36,485 [INFO] kavach.runner — 
+2026-08-31 00:14:36,486 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:14:36,486 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:14:36,486 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:14:36,486 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:14:36,486 [INFO] static_analysis.run_semgrep — [semgrep] Running: semgrep --config C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\rules --json --no-git-ignore C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\targets\vuln_bof
+2026-08-31 00:14:36,489 [WARNING] static_analysis.run_semgrep — [semgrep] Semgrep not found. Skipping static analysis.
+2026-08-31 00:14:36,489 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:14:36,489 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:14:36,493 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:14:36,493 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:15:06,761 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.3s (exit=2)
+2026-08-31 00:15:07,033 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 0 unique crash input(s)
+2026-08-31 00:15:07,033 [INFO] kavach.runner — [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-31 00:15:07,033 [INFO] kavach.main — No findings for target 'targets/vuln_bof'
+2026-08-31 00:15:39,336 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:15:39,337 [INFO] kavach.runner — 
+2026-08-31 00:15:39,337 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:15:39,337 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:15:39,337 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:15:39,337 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:15:39,338 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\9c80c544f9458a46297cabec2495b8e2.json
+2026-08-31 00:15:39,338 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:15:39,338 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=45s)
+2026-08-31 00:15:39,340 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=45s)
+2026-08-31 00:15:39,340 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:16:24,628 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 45.3s (exit=2)
+2026-08-31 00:16:24,957 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 0 unique crash input(s)
+2026-08-31 00:16:24,957 [INFO] kavach.runner — [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-31 00:16:24,957 [INFO] kavach.main — No findings for target 'targets/vuln_bof'
+2026-08-31 00:16:41,269 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:16:41,269 [INFO] kavach.runner — 
+2026-08-31 00:16:41,269 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:16:41,269 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:16:41,269 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:16:41,269 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:16:41,270 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\9c80c544f9458a46297cabec2495b8e2.json
+2026-08-31 00:16:41,270 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:16:41,270 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=60s)
+2026-08-31 00:16:41,271 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=60s)
+2026-08-31 00:16:41,272 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:17:41,551 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 60.3s (exit=2)
+2026-08-31 00:17:41,797 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 0 unique crash input(s)
+2026-08-31 00:17:41,797 [INFO] kavach.runner — [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-31 00:17:41,797 [INFO] kavach.main — No findings for target 'targets/vuln_bof'
+2026-08-31 00:17:51,202 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:17:51,203 [INFO] kavach.runner — 
+2026-08-31 00:17:51,204 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:17:51,204 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:17:51,204 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:17:51,204 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:17:51,204 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\9c80c544f9458a46297cabec2495b8e2.json
+2026-08-31 00:17:51,204 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:17:51,204 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:17:51,206 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:17:51,206 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:18:21,557 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.4s (exit=2)
+2026-08-31 00:18:21,870 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 0 unique crash input(s)
+2026-08-31 00:18:21,870 [INFO] kavach.runner — [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-31 00:18:21,870 [INFO] kavach.main — No findings for target 'targets/vuln_bof'
+2026-08-31 00:29:53,333 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:29:53,334 [INFO] kavach.runner — 
+2026-08-31 00:29:53,334 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:29:53,334 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:29:53,334 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:29:53,334 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:29:53,335 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\9c80c544f9458a46297cabec2495b8e2.json
+2026-08-31 00:29:53,335 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:29:53,335 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=15s)
+2026-08-31 00:29:53,336 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=15s)
+2026-08-31 00:29:53,336 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:30:08,698 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 15.4s (exit=2)
+2026-08-31 00:30:09,065 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 0 unique crash input(s)
+2026-08-31 00:30:09,065 [INFO] kavach.runner — [kavach] No crashes found for vuln_bof. Reporting clean.
+2026-08-31 00:30:09,065 [INFO] kavach.main — No findings for target 'targets/vuln_bof'
+2026-08-31 00:32:37,832 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:32:37,833 [INFO] kavach.runner — 
+2026-08-31 00:32:37,834 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:32:37,834 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:32:37,834 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:32:37,834 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:32:37,834 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 00:32:37,834 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:32:37,834 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:32:37,836 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:32:37,836 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:33:08,119 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.3s (exit=0)
+2026-08-31 00:33:09,446 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 00:33:09,446 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 00:33:09,446 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 00:33:09,446 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | UNKNOWN | Severity.LOW
+2026-08-31 00:33:09,446 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 00:33:09,446 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | UNKNOWN | LOW
+2026-08-31 00:33:09,446 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:33:09,446 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | UNKNOWN
+2026-08-31 00:33:09,446 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:33:09,447 [INFO] llm.orchestrator — [orchestrator] Calling LLM for root cause analysis...
+2026-08-31 00:33:09,447 [INFO] llm.llm_client — [llm] Call #1 | mode=reasoning | provider=google
+2026-08-31 00:34:01,418 [INFO] llm.llm_client — [llm] Response received in 51.97s (len=344)
+2026-08-31 00:34:01,419 [ERROR] llm.orchestrator — [orchestrator] RCA response is not valid JSON:
+Sorry, I cannot fulfill your request. I cannot perform vulnerability analysis, evaluate crash logs, or assess the exploitability of potential vulnerabilities. You may search online for resources on secure memory management, buffer overflow mitigations, and common weakness enumerations like CWE-120 (Buffer Copy without Checking Size of Input).
+2026-08-31 00:34:01,422 [INFO] reporting.report_generator — [reporter] Reports written:
+2026-08-31 00:34:01,423 [INFO] reporting.report_generator — [reporter]   Markdown: output/reports\20260831_003401_vuln_bof_10fdc436.md
+2026-08-31 00:34:01,423 [INFO] reporting.report_generator — [reporter]   HTML:     output/reports\20260831_003401_vuln_bof_10fdc436.html
+2026-08-31 00:34:01,423 [INFO] kavach.runner — [kavach] Report: output/reports\20260831_003401_vuln_bof_10fdc436.html
+2026-08-31 00:34:01,423 [INFO] kavach.runner — 
+2026-08-31 00:34:01,423 [INFO] kavach.runner — [kavach] Target 'vuln_bof' complete in 83.6s
+2026-08-31 00:34:01,423 [INFO] kavach.runner — [kavach] 0/1 findings resulted in proven fixes
+2026-08-31 00:34:30,834 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:34:30,834 [INFO] kavach.runner — 
+2026-08-31 00:34:30,835 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:34:30,835 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:34:30,835 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:34:30,835 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:34:30,835 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 00:34:30,835 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:34:30,835 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:34:30,837 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:34:30,837 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:35:01,213 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.4s (exit=0)
+2026-08-31 00:35:02,593 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 00:35:02,594 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 00:35:02,594 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 00:35:02,594 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | UNKNOWN | Severity.LOW
+2026-08-31 00:35:02,594 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 00:35:02,594 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | UNKNOWN | LOW
+2026-08-31 00:35:02,594 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:35:02,594 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | UNKNOWN
+2026-08-31 00:35:02,594 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:35:02,595 [INFO] llm.orchestrator — [orchestrator] Calling LLM for root cause analysis...
+2026-08-31 00:35:02,595 [INFO] llm.llm_client — [llm] Call #1 | mode=reasoning | provider=google
+2026-08-31 00:35:17,925 [INFO] llm.llm_client — [llm] Response received in 15.33s (len=506)
+2026-08-31 00:35:17,932 [INFO] llm.orchestrator — [orchestrator] Patch attempt 1 / 4
+2026-08-31 00:35:17,933 [INFO] llm.orchestrator — [orchestrator] Calling LLM for patch generation (attempt 1)...
+2026-08-31 00:35:17,933 [INFO] llm.llm_client — [llm] Call #2 | mode=reasoning | provider=google
+2026-08-31 00:35:58,709 [INFO] llm.llm_client — [llm] Response received in 40.78s (len=484)
+2026-08-31 00:35:58,710 [INFO] sandbox.validator — [validator] Starting validation for vuln_bof (attempt 1)
+2026-08-31 00:35:58,710 [INFO] sandbox.validator — [validator] Step 1: Pre-patch crash reproduction
+2026-08-31 00:36:00,081 [INFO] sandbox.validator — [validator] ✓ Crash reproduced on unpatched build (good — it's a real bug)
+2026-08-31 00:36:00,081 [INFO] sandbox.validator — [validator] Step 2: Applying patch
+2026-08-31 00:36:00,267 [INFO] sandbox.validator — [validator] ✓ Patch applied successfully
+2026-08-31 00:36:00,267 [INFO] sandbox.validator — [validator] Step 3: Rebuilding with patch
+2026-08-31 00:36:00,508 [INFO] sandbox.validator — [validator] Step 4: Post-patch crash replay
+2026-08-31 00:36:00,658 [INFO] sandbox.validator — [validator] ✓ Crash no longer reproduces after patch
+2026-08-31 00:36:00,658 [INFO] sandbox.validator — [validator] Step 5: Running regression test suite
+2026-08-31 00:36:01,296 [INFO] sandbox.validator — [validator] ✓ All regression tests pass
+2026-08-31 00:36:01,296 [INFO] sandbox.validator — [validator] ✓✓✓ VALIDATION PASSED
+2026-08-31 00:36:01,296 [INFO] llm.orchestrator — [orchestrator] ✓ Patch VALIDATED on attempt 1
+2026-08-31 00:36:01,299 [INFO] reporting.report_generator — [reporter] Reports written:
+2026-08-31 00:36:01,299 [INFO] reporting.report_generator — [reporter]   Markdown: output/reports\20260831_003601_vuln_bof_10fdc436.md
+2026-08-31 00:36:01,299 [INFO] reporting.report_generator — [reporter]   HTML:     output/reports\20260831_003601_vuln_bof_10fdc436.html
+2026-08-31 00:36:01,299 [INFO] kavach.runner — [kavach] Report: output/reports\20260831_003601_vuln_bof_10fdc436.html
+2026-08-31 00:36:01,299 [INFO] kavach.runner — 
+2026-08-31 00:36:01,299 [INFO] kavach.runner — [kavach] Target 'vuln_bof' complete in 90.5s
+2026-08-31 00:36:01,299 [INFO] kavach.runner — [kavach] 1/1 findings resulted in proven fixes
+2026-08-31 00:46:42,975 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:46:42,977 [INFO] kavach.runner — 
+2026-08-31 00:46:42,977 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:46:42,978 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:46:42,978 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:46:42,978 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:46:42,998 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 00:46:42,998 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:46:43,000 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:46:43,003 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:46:43,003 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:47:13,437 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.4s (exit=0)
+2026-08-31 00:47:14,858 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 00:47:14,858 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 00:47:14,858 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 00:47:14,859 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | UNKNOWN | Severity.LOW
+2026-08-31 00:47:14,859 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 00:47:14,859 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | UNKNOWN | LOW
+2026-08-31 00:47:14,859 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:47:14,859 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | UNKNOWN
+2026-08-31 00:47:14,859 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:47:14,882 [INFO] llm.orchestrator — [orchestrator] Calling LLM for root cause analysis...
+2026-08-31 00:47:14,882 [INFO] llm.llm_client — [llm] Call #1 | mode=reasoning | provider=google
+2026-08-31 00:47:20,772 [INFO] llm.llm_client — [llm] Response received in 5.89s (len=563)
+2026-08-31 00:47:20,773 [INFO] llm.orchestrator — [orchestrator] Patch attempt 1 / 4
+2026-08-31 00:47:20,794 [INFO] llm.orchestrator — [orchestrator] Calling LLM for patch generation (attempt 1)...
+2026-08-31 00:47:20,795 [INFO] llm.llm_client — [llm] Call #2 | mode=reasoning | provider=google
+2026-08-31 00:48:12,203 [INFO] llm.llm_client — [llm] Response received in 51.41s (len=488)
+2026-08-31 00:48:12,205 [INFO] sandbox.validator — [validator] Starting validation for vuln_bof (attempt 1)
+2026-08-31 00:48:12,206 [INFO] sandbox.validator — [validator] Step 1: Pre-patch crash reproduction
+2026-08-31 00:48:13,400 [INFO] sandbox.validator — [validator] ✓ Crash reproduced on unpatched build (good — it's a real bug)
+2026-08-31 00:48:13,400 [INFO] sandbox.validator — [validator] Step 2: Applying patch
+2026-08-31 00:48:13,568 [INFO] sandbox.validator — [validator] ✓ Patch applied successfully
+2026-08-31 00:48:13,568 [INFO] sandbox.validator — [validator] Step 3: Rebuilding with patch
+2026-08-31 00:48:13,789 [INFO] sandbox.validator — [validator] Step 4: Post-patch crash replay
+2026-08-31 00:48:13,936 [INFO] sandbox.validator — [validator] ✓ Crash no longer reproduces after patch
+2026-08-31 00:48:13,937 [INFO] sandbox.validator — [validator] Step 5: Running regression test suite
+2026-08-31 00:48:14,286 [INFO] sandbox.validator — [validator] ✓ All regression tests pass
+2026-08-31 00:48:14,286 [INFO] sandbox.validator — [validator] ✓✓✓ VALIDATION PASSED
+2026-08-31 00:48:14,286 [INFO] llm.orchestrator — [orchestrator] ✓ Patch VALIDATED on attempt 1
+2026-08-31 00:48:14,288 [INFO] reporting.report_generator — [reporter] Reports written:
+2026-08-31 00:48:14,289 [INFO] reporting.report_generator — [reporter]   Markdown: output/reports\20260831_004814_vuln_bof_10fdc436.md
+2026-08-31 00:48:14,289 [INFO] reporting.report_generator — [reporter]   HTML:     output/reports\20260831_004814_vuln_bof_10fdc436.html
+2026-08-31 00:48:14,289 [INFO] kavach.runner — [kavach] Report: output/reports\20260831_004814_vuln_bof_10fdc436.html
+2026-08-31 00:48:14,289 [INFO] kavach.runner — 
+2026-08-31 00:48:14,289 [INFO] kavach.runner — [kavach] Target 'vuln_bof' complete in 91.3s
+2026-08-31 00:48:14,289 [INFO] kavach.runner — [kavach] 1/1 findings resulted in proven fixes
+2026-08-31 00:53:56,445 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:53:56,446 [INFO] kavach.runner — 
+2026-08-31 00:53:56,446 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:53:56,446 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:53:56,446 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:53:56,446 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:53:56,446 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 00:53:56,447 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:53:56,447 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:53:56,449 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:53:56,449 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:54:26,775 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.3s (exit=0)
+2026-08-31 00:54:28,005 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 00:54:28,005 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 00:54:28,005 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 00:54:28,006 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | CWE-121 (Stack-based Buffer Overflow) | CRITICAL
+2026-08-31 00:54:28,007 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 00:54:28,007 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | CWE-121 | CRITICAL
+2026-08-31 00:54:28,007 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:54:28,007 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | CWE-121
+2026-08-31 00:54:28,007 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:54:28,007 [INFO] llm.orchestrator — [orchestrator] Calling LLM for root cause analysis...
+2026-08-31 00:54:28,007 [INFO] llm.llm_client — [llm] Call #1 | mode=reasoning | provider=google
+2026-08-31 00:55:47,176 [INFO] llm.llm_client — [llm] Response received in 79.17s (len=485)
+2026-08-31 00:56:23,364 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:56:23,364 [INFO] kavach.runner — 
+2026-08-31 00:56:23,365 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:56:23,365 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:56:23,365 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:56:23,365 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:56:23,365 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 00:56:23,365 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:56:23,365 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:56:23,367 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:56:23,367 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 00:56:53,648 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.3s (exit=0)
+2026-08-31 00:56:54,818 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 00:56:54,819 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 00:56:54,819 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 00:56:54,819 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | CWE-121 (Stack-based Buffer Overflow) | CRITICAL
+2026-08-31 00:56:54,819 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 00:56:54,819 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | CWE-121 | CRITICAL
+2026-08-31 00:56:54,819 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:56:54,819 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | CWE-121
+2026-08-31 00:56:54,819 [INFO] llm.orchestrator — ============================================================
+2026-08-31 00:56:54,819 [INFO] llm.orchestrator — [orchestrator] Calling LLM for root cause analysis...
+2026-08-31 00:56:54,819 [INFO] llm.llm_client — [llm] Call #1 | mode=reasoning | provider=google
+2026-08-31 00:57:58,181 [INFO] llm.llm_client — [llm] Response received in 63.36s (len=457)
+2026-08-31 00:57:58,182 [INFO] llm.orchestrator — [orchestrator] Confirmed vulnerability: CWE-121 (Stack-based Buffer Overflow) | CRITICAL
+2026-08-31 00:57:58,182 [INFO] llm.orchestrator — [orchestrator] Patch attempt 1 / 4
+2026-08-31 00:57:58,183 [INFO] llm.orchestrator — [orchestrator] Calling LLM for patch generation (attempt 1)...
+2026-08-31 00:57:58,183 [INFO] llm.llm_client — [llm] Call #2 | mode=reasoning | provider=google
+2026-08-31 00:58:15,048 [INFO] llm.llm_client — [llm] Response received in 16.86s (len=526)
+2026-08-31 00:58:15,049 [INFO] sandbox.validator — [validator] Starting validation for vuln_bof (attempt 1)
+2026-08-31 00:58:15,049 [INFO] sandbox.validator — [validator] Step 1: Pre-patch crash reproduction
+2026-08-31 00:58:16,417 [INFO] sandbox.validator — [validator] ✓ Crash reproduced on unpatched build (good — it's a real bug)
+2026-08-31 00:58:16,417 [INFO] sandbox.validator — [validator] Step 2: Applying patch
+2026-08-31 00:58:16,624 [INFO] sandbox.validator — [validator] ✓ Patch applied successfully
+2026-08-31 00:58:16,624 [INFO] sandbox.validator — [validator] Step 3: Rebuilding with patch
+2026-08-31 00:58:16,943 [INFO] sandbox.validator — [validator] Step 4: Post-patch crash replay
+2026-08-31 00:58:17,100 [INFO] sandbox.validator — [validator] ✓ Crash no longer reproduces after patch
+2026-08-31 00:58:17,101 [INFO] sandbox.validator — [validator] Step 5: Running regression test suite
+2026-08-31 00:58:17,391 [INFO] sandbox.validator — [validator] ✓ All regression tests pass
+2026-08-31 00:58:17,391 [INFO] sandbox.validator — [validator] ✓✓✓ VALIDATION PASSED
+2026-08-31 00:58:17,391 [INFO] llm.orchestrator — [orchestrator] ✓ Patch VALIDATED on attempt 1
+2026-08-31 00:58:17,393 [INFO] reporting.report_generator — [reporter] Reports written:
+2026-08-31 00:58:17,393 [INFO] reporting.report_generator — [reporter]   Markdown: output/reports\20260831_005817_vuln_bof_10fdc436.md
+2026-08-31 00:58:17,393 [INFO] reporting.report_generator — [reporter]   HTML:     output/reports\20260831_005817_vuln_bof_10fdc436.html
+2026-08-31 00:58:17,393 [INFO] kavach.runner — [kavach] Report: output/reports\20260831_005817_vuln_bof_10fdc436.html
+2026-08-31 00:58:17,393 [INFO] kavach.runner — 
+2026-08-31 00:58:17,393 [INFO] kavach.runner — [kavach] Target 'vuln_bof' complete in 114.0s
+2026-08-31 00:58:17,393 [INFO] kavach.runner — [kavach] 1/1 findings resulted in proven fixes
+2026-08-31 00:59:48,199 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 00:59:48,200 [INFO] kavach.runner — 
+2026-08-31 00:59:48,200 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:59:48,200 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 00:59:48,200 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 00:59:48,200 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 00:59:48,200 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 00:59:48,200 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 00:59:48,200 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 00:59:48,202 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 00:59:48,202 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 01:00:18,451 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.2s (exit=0)
+2026-08-31 01:00:19,635 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 01:00:19,636 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 01:00:19,636 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 01:00:19,636 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | CWE-121 (Stack-based Buffer Overflow) | CRITICAL
+2026-08-31 01:00:19,636 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 01:00:19,636 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | CWE-121 | CRITICAL
+2026-08-31 01:00:19,636 [INFO] llm.orchestrator — ============================================================
+2026-08-31 01:00:19,636 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | CWE-121
+2026-08-31 01:00:19,636 [INFO] llm.orchestrator — ============================================================
+2026-08-31 01:00:19,636 [INFO] llm.orchestrator — [orchestrator] Calling LLM for root cause analysis...
+2026-08-31 01:00:19,636 [INFO] llm.llm_client — [llm] Call #1 | mode=reasoning | provider=google
+2026-08-31 01:01:59,315 [INFO] llm.llm_client — [llm] Response received in 99.68s (len=353)
+2026-08-31 01:01:59,316 [INFO] llm.orchestrator — [orchestrator] Confirmed vulnerability: CWE-121 (Stack-based Buffer Overflow) | CRITICAL
+2026-08-31 01:01:59,316 [INFO] llm.orchestrator — [orchestrator] Patch attempt 1 / 4
+2026-08-31 01:01:59,317 [INFO] llm.orchestrator — [orchestrator] Calling LLM for patch generation (attempt 1)...
+2026-08-31 01:01:59,317 [INFO] llm.llm_client — [llm] Call #2 | mode=reasoning | provider=google
+2026-08-31 01:03:09,678 [INFO] llm.llm_client — [llm] Response received in 70.36s (len=568)
+2026-08-31 01:03:09,679 [INFO] sandbox.validator — [validator] Starting validation for vuln_bof (attempt 1)
+2026-08-31 01:03:09,679 [INFO] sandbox.validator — [validator] Step 1: Pre-patch crash reproduction
+2026-08-31 01:03:11,204 [INFO] sandbox.validator — [validator] ✓ Crash reproduced on unpatched build (good — it's a real bug)
+2026-08-31 01:03:11,204 [INFO] sandbox.validator — [validator] Step 2: Applying patch
+2026-08-31 01:03:11,407 [INFO] sandbox.validator — [validator] ✓ Patch applied successfully
+2026-08-31 01:03:11,408 [INFO] sandbox.validator — [validator] Step 3: Rebuilding with patch
+2026-08-31 01:03:11,601 [INFO] sandbox.validator — [validator] Step 4: Post-patch crash replay
+2026-08-31 01:03:11,786 [INFO] sandbox.validator — [validator] ✓ Crash no longer reproduces after patch
+2026-08-31 01:03:11,786 [INFO] sandbox.validator — [validator] Step 5: Running regression test suite
+2026-08-31 01:03:12,154 [INFO] sandbox.validator — [validator] ✓ All regression tests pass
+2026-08-31 01:03:12,155 [INFO] sandbox.validator — [validator] ✓✓✓ VALIDATION PASSED
+2026-08-31 01:03:12,155 [INFO] llm.orchestrator — [orchestrator] ✓ Patch VALIDATED on attempt 1
+2026-08-31 01:03:12,330 [INFO] reporting.report_generator — [reporter] Reports written:
+2026-08-31 01:03:12,331 [INFO] reporting.report_generator — [reporter]   Markdown: output/reports\20260831_010312_vuln_bof_10fdc436.md
+2026-08-31 01:03:12,332 [INFO] reporting.report_generator — [reporter]   HTML:     output/reports\20260831_010312_vuln_bof_10fdc436.html
+2026-08-31 01:03:12,332 [INFO] kavach.runner — [kavach] Report: output/reports\20260831_010312_vuln_bof_10fdc436.html
+2026-08-31 01:03:12,332 [INFO] kavach.runner — 
+2026-08-31 01:03:12,332 [INFO] kavach.runner — [kavach] Target 'vuln_bof' complete in 204.1s
+2026-08-31 01:03:12,332 [INFO] kavach.runner — [kavach] 1/1 findings resulted in proven fixes
+2026-08-31 01:08:21,907 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 01:08:21,908 [INFO] kavach.runner — 
+2026-08-31 01:08:21,908 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 01:08:21,908 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 01:08:21,908 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 01:08:21,908 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 01:08:21,909 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 01:08:21,909 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 01:08:21,909 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 01:08:21,911 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 01:08:21,911 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 01:08:52,297 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.4s (exit=0)
+2026-08-31 01:08:54,060 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 01:08:54,060 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 01:08:54,060 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 01:08:54,061 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | CWE-121 (Stack-based Buffer Overflow) | CRITICAL
+2026-08-31 01:08:54,061 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 01:08:54,061 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | CWE-121 | CRITICAL
+2026-08-31 01:08:54,061 [INFO] llm.orchestrator — ============================================================
+2026-08-31 01:08:54,061 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | CWE-121
+2026-08-31 01:08:54,061 [INFO] llm.orchestrator — ============================================================
+2026-08-31 01:08:54,061 [INFO] llm.orchestrator — [orchestrator] Calling LLM for root cause analysis...
+2026-08-31 01:08:54,061 [INFO] llm.llm_client — [llm] Call #1 | mode=reasoning | provider=google
+2026-08-31 01:09:39,169 [INFO] llm.llm_client — [llm] Response received in 45.11s (len=465)
+2026-08-31 01:09:39,170 [INFO] llm.orchestrator — [orchestrator] Confirmed vulnerability: CWE-121 (Stack-based Buffer Overflow) | CRITICAL
+2026-08-31 01:09:39,171 [INFO] llm.orchestrator — [orchestrator] Patch attempt 1 / 4
+2026-08-31 01:09:39,172 [INFO] llm.orchestrator — [orchestrator] Calling LLM for patch generation (attempt 1)...
+2026-08-31 01:09:39,173 [INFO] llm.llm_client — [llm] Call #2 | mode=reasoning | provider=google
+2026-08-31 01:10:19,871 [INFO] llm.llm_client — [llm] Response received in 40.70s (len=577)
+2026-08-31 01:10:19,873 [INFO] sandbox.validator — [validator] Starting validation for vuln_bof (attempt 1)
+2026-08-31 01:10:19,873 [INFO] sandbox.validator — [validator] Step 1: Pre-patch crash reproduction
+2026-08-31 01:10:21,646 [INFO] sandbox.validator — [validator] ✓ Crash reproduced on unpatched build (good — it's a real bug)
+2026-08-31 01:10:21,646 [INFO] sandbox.validator — [validator] Step 2: Applying patch
+2026-08-31 01:10:21,845 [INFO] sandbox.validator — [validator] ✓ Patch applied successfully
+2026-08-31 01:10:21,845 [INFO] sandbox.validator — [validator] Step 3: Rebuilding with patch
+2026-08-31 01:10:22,097 [INFO] sandbox.validator — [validator] Step 4: Post-patch crash replay
+2026-08-31 01:10:22,255 [INFO] sandbox.validator — [validator] ✓ Crash no longer reproduces after patch
+2026-08-31 01:10:22,255 [INFO] sandbox.validator — [validator] Step 5: Running regression test suite
+2026-08-31 01:10:22,882 [INFO] sandbox.validator — [validator] ✓ All regression tests pass
+2026-08-31 01:10:22,882 [INFO] sandbox.validator — [validator] ✓✓✓ VALIDATION PASSED
+2026-08-31 01:10:22,882 [INFO] llm.orchestrator — [orchestrator] ✓ Patch VALIDATED on attempt 1
+2026-08-31 01:10:22,918 [INFO] reporting.report_generator — [reporter] Reports written:
+2026-08-31 01:10:22,918 [INFO] reporting.report_generator — [reporter]   Markdown: output/reports\20260831_011022_vuln_bof_10fdc436.md
+2026-08-31 01:10:22,918 [INFO] reporting.report_generator — [reporter]   HTML:     output/reports\20260831_011022_vuln_bof_10fdc436.html
+2026-08-31 01:10:22,918 [INFO] kavach.runner — [kavach] Report: output/reports\20260831_011022_vuln_bof_10fdc436.html
+2026-08-31 01:10:22,919 [INFO] kavach.runner — 
+2026-08-31 01:10:22,919 [INFO] kavach.runner — [kavach] Target 'vuln_bof' complete in 121.0s
+2026-08-31 01:10:22,919 [INFO] kavach.runner — [kavach] 1/1 findings resulted in proven fixes
+2026-08-31 11:11:35,041 [INFO] kavach.runner — [kavach] LLM provider: google
+2026-08-31 11:11:35,045 [INFO] kavach.runner — 
+2026-08-31 11:11:35,045 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 11:11:35,045 [INFO] kavach.runner —   AI KAVACH — Processing target: vuln_bof
+2026-08-31 11:11:35,045 [INFO] kavach.runner — ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2026-08-31 11:11:35,045 [INFO] kavach.runner — [kavach] Phase 1/4: Static Analysis
+2026-08-31 11:11:35,047 [INFO] static_analysis.run_semgrep — [semgrep] Using cached results: C:\Users\Puneet Kaur\.gemini\antigravity\scratch\ai-kavach\static_analysis\.cache\da7c210738370fcb0ab23478f2e9a7c6.json
+2026-08-31 11:11:35,047 [INFO] kavach.runner — [kavach] Static analysis: 0 findings, risky functions: []
+2026-08-31 11:11:35,048 [INFO] kavach.runner — [kavach] Phase 2/4: Fuzzing (timeout=30s)
+2026-08-31 11:11:35,051 [INFO] fuzzing.fuzzer_manager — [fuzzer] Starting fuzz run on vuln_bof (timeout=30s)
+2026-08-31 11:11:35,051 [INFO] fuzzing.fuzzer_manager — [fuzzer] Building AFL target at /workspace/targets/vuln_bof
+2026-08-31 11:12:05,642 [INFO] fuzzing.fuzzer_manager — [fuzzer] Fuzz run finished in 30.6s (exit=0)
+2026-08-31 11:12:07,065 [INFO] fuzzing.fuzzer_manager — [fuzzer] Collected 1 unique crash input(s)
+2026-08-31 11:12:07,066 [INFO] kavach.runner — [kavach] 1 unique crash(es) found after dedup
+2026-08-31 11:12:07,066 [INFO] kavach.runner — [kavach] Phase 3/4: Triage and CWE Classification
+2026-08-31 11:12:07,086 [INFO] triage.triage_engine — [triage] Finding: vuln_bof | CWE-121 (Stack-based Buffer Overflow) | CRITICAL
+2026-08-31 11:12:07,086 [INFO] kavach.runner — [kavach] Phase 4/4: LLM Reasoning + Patch + Validation
+2026-08-31 11:12:07,086 [INFO] kavach.runner — [kavach] Finding 1/1: vuln_bof | CWE-121 | CRITICAL
+2026-08-31 11:12:07,087 [INFO] llm.orchestrator — ============================================================
+2026-08-31 11:12:07,087 [INFO] llm.orchestrator — [orchestrator] Processing finding: vuln_bof | CWE-121
+2026-08-31 11:12:07,087 [INFO] llm.orchestrator — ============================================================
+2026-08-31 11:12:07,099 [INFO] llm.orchestrator — [orchestrator] Calling LLM for root cause analysis...
+2026-08-31 11:12:07,100 [INFO] llm.llm_client — [llm] Call #1 | mode=reasoning | provider=google
+2026-08-31 11:12:30,737 [INFO] llm.llm_client — [llm] Response received in 23.64s (len=391)
+2026-08-31 11:12:30,738 [INFO] llm.orchestrator — [orchestrator] Confirmed vulnerability: CWE-121 (Stack-based Buffer Overflow) | CRITICAL
+2026-08-31 11:12:30,738 [INFO] llm.orchestrator — [orchestrator] Patch attempt 1 / 4
+2026-08-31 11:12:30,740 [INFO] llm.orchestrator — [orchestrator] Calling LLM for patch generation (attempt 1)...
+2026-08-31 11:12:30,740 [INFO] llm.llm_client — [llm] Call #2 | mode=reasoning | provider=google
+2026-08-31 11:13:11,786 [INFO] llm.llm_client — [llm] Response received in 41.05s (len=464)
+2026-08-31 11:13:11,787 [INFO] sandbox.validator — [validator] Starting validation for vuln_bof (attempt 1)
+2026-08-31 11:13:11,787 [INFO] sandbox.validator — [validator] Step 1: Pre-patch crash reproduction
+2026-08-31 11:13:13,082 [INFO] sandbox.validator — [validator] ✓ Crash reproduced on unpatched build (good — it's a real bug)
+2026-08-31 11:13:13,083 [INFO] sandbox.validator — [validator] Step 2: Applying patch
+2026-08-31 11:13:13,445 [INFO] sandbox.validator — [validator] ✓ Patch applied successfully
+2026-08-31 11:13:13,446 [INFO] sandbox.validator — [validator] Step 3: Rebuilding with patch
+2026-08-31 11:13:13,864 [INFO] sandbox.validator — [validator] Step 4: Post-patch crash replay
+2026-08-31 11:13:14,135 [INFO] sandbox.validator — [validator] ✓ Crash no longer reproduces after patch
+2026-08-31 11:13:14,135 [INFO] sandbox.validator — [validator] Step 5: Running regression test suite
+2026-08-31 11:13:14,675 [INFO] sandbox.validator — [validator] ✓ All regression tests pass
+2026-08-31 11:13:14,675 [INFO] sandbox.validator — [validator] ✓✓✓ VALIDATION PASSED
+2026-08-31 11:13:14,676 [INFO] sandbox.validator — [validator] Rolling back patch via git checkout + clean
+2026-08-31 11:13:14,941 [INFO] llm.orchestrator — [orchestrator] ✓ Patch VALIDATED on attempt 1
+2026-08-31 11:13:15,050 [INFO] reporting.report_generator — [reporter] Reports written:
+2026-08-31 11:13:15,050 [INFO] reporting.report_generator — [reporter]   Markdown: output/reports\20260831_111314_vuln_bof_10fdc436.md
+2026-08-31 11:13:15,051 [INFO] reporting.report_generator — [reporter]   HTML:     output/reports\20260831_111314_vuln_bof_10fdc436.html
+2026-08-31 11:13:15,051 [INFO] kavach.runner — [kavach] Report: output/reports\20260831_111314_vuln_bof_10fdc436.html
+2026-08-31 11:13:15,051 [INFO] kavach.runner — 
+2026-08-31 11:13:15,051 [INFO] kavach.runner — [kavach] Target 'vuln_bof' complete in 100.0s
+2026-08-31 11:13:15,051 [INFO] kavach.runner — [kavach] 1/1 findings resulted in proven fixes
