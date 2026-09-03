@@ -27,13 +27,16 @@ fi
 rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 
+# Memory limit configuration for AFL++ (-m none is required for AddressSanitizer shadow memory)
+MEM_ARG="-m none"
+
 echo "[kavach-fuzzer] Starting AFL++ on $TARGET_BIN"
-echo "[kavach-fuzzer] Timeout: ${TIMEOUT}s | Memory: ${MAX_MEMORY_MB} MB"
+echo "[kavach-fuzzer] Timeout: ${TIMEOUT}s | Memory: $MEM_ARG"
 
 timeout "${TIMEOUT}" afl-fuzz \
     -i "$SEED_DIR" \
     -o "$OUTPUT_DIR" \
-    -m "$MAX_MEMORY_MB" \
+    $MEM_ARG \
     -t 5000 \
     -- "$TARGET_BIN" @@ 2>&1 || true
 

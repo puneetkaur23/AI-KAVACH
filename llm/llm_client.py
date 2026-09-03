@@ -30,8 +30,8 @@ class LLMConfig:
     provider: str = "google"          # google | openai | ollama
     # Google
     google_api_key: str = ""
-    google_triage_model: str = "gemini-3.6-flash"    # fast, cheap — for triage
-    google_reasoning_model: str = "gemini-3.6-flash"   # capable, active free tier
+    google_triage_model: str = "gemini-3.5-flash"    # active free tier
+    google_reasoning_model: str = "gemini-3.5-flash"   # capable, active free tier
     # OpenAI
     openai_api_key: str = ""
     openai_model: str = "gpt-4o"
@@ -165,16 +165,45 @@ class LLMClient:
         api_key = self.cfg.google_api_key or os.getenv("GOOGLE_API_KEY", "")
         if api_key:
             genai.configure(api_key=api_key)
-        model_name = (
-            self.cfg.google_triage_model if mode == "triage"
-            else self.cfg.google_reasoning_model
-        )
-        model = genai.GenerativeModel(
-            model_name,
-            system_instruction=system or "You are an expert C/C++ software engineer and code maintenance assistant helping developers remediate memory safety bugs."
-        )
-        response = model.generate_content(prompt)
-        return response.text
+        
+        fallback_models = [
+            "gemini-3.5-flash",
+            "gemma-4-31b-it",
+            "gemini-3.7-flash",
+        ]
+        
+        # Priority model
+        primary = self.cfg.google_triage_model if mode == "triage" else self.cfg.google_reasoning_model
+        if primary not in fallback_models:
+            fallback_models.insert(0, primary)
+        else:
+            fallback_models.remove(primary)
+            fallback_models.insert(0, primary)
+
+        last_err = None
+        for m_name in fallback_models:
+            for attempt in range(3):
+                try:
+                    log.info("[llm] Querying Gemini model %s (attempt %d)...", m_name, attempt + 1)
+                    model = genai.GenerativeModel(
+                        m_name,
+                        system_instruction=system or "You are an expert C/C++ software engineer and code maintenance assistant helping developers remediate memory safety bugs."
+                    )
+                    response = model.generate_content(prompt)
+                    return response.text
+                except Exception as e:
+                    last_err = e
+                    err_str = str(e)
+                    if "429" in err_str or "quota" in err_str.lower() or "ResourceExhausted" in err_str:
+                        log.warning("[llm] Rate limit on %s: %s — trying next fallback or backoff", m_name, err_str[:150])
+                        time.sleep(3)
+                        break  # Try next model in fallback list
+                    else:
+                        time.sleep(2)
+
+        if last_err:
+            raise last_err
+        raise RuntimeError("All Gemini fallback models exhausted.")
 
     def _call_openai(self, prompt: str, mode: str, system: str) -> str:
         messages = []
